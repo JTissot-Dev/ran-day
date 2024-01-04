@@ -1,0 +1,16 @@
+.btn-header {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px 6px 12px;
+  color: rgba(59, 59, 60, 0.976);
+  border: 1px solid rgba(128, 128, 128, 0.327);
+  border-radius: 9999px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.btn-header span:last-child {
+  margin-left: 10px;
+  font-weight: 600;
+  font-size: 15px;
+}
