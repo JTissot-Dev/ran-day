@@ -1,6 +1,16 @@
 .btn-nav-toggle {
+  position: fixed;
+  top: 10px;
+  right: 35px;
   border: none;
   background-color: transparent;
   margin: 10px 0px 0px 15px;
   cursor: pointer;
+  z-index: 30;
+}
+
+@media screen and (max-width: 640px) {
+  .btn-nav-toggle {
+    right: 15px;
+  }
 }

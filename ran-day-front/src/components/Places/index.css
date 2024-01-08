@@ -1,0 +1,41 @@
+.grid-places {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  column-gap: 30px;
+  row-gap: 25px;
+}
+
+.grid-places > article:nth-child(-n+2) {
+  grid-column: span 3;
+}
+
+.grid-places > article:nth-child(n+3) {
+  grid-column: span 2;
+}
+
+.places-title {
+  color: #404041;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 640px) and (max-width: 768px) {
+  .grid-places {
+    column-gap: 10px;
+    row-gap: 5px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .grid-places {
+    column-gap: 20px;
+    row-gap: 15px;
+  }
+
+  .grid-places > article:nth-child(-n+1) {
+    grid-column: span 6;
+  }
+  
+  .grid-places > article:nth-child(n+3) {
+    grid-column: span 3;
+  }
+}

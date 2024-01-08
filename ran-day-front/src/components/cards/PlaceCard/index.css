@@ -1,0 +1,43 @@
+.place-article {
+  position: relative;
+  padding: 0;
+}
+
+.place-title {
+  position: absolute;
+  top: -5px;
+  left: 22px;
+  font-family: sans-serif;
+  font-weight: bolder;
+  font-size: 22px;
+  color: #FDFDFF;
+  z-index: 1;
+  text-shadow: rgba(0, 0, 0, 0.624) 1px 0 2px;
+}
+
+.place-img {
+  border-radius: 20px;
+  width: 100%;
+  height: auto;
+}
+
+.btn-place {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.btn-place:hover {
+  cursor: pointer;
+}
+
+.place-img:hover {
+  opacity: 85%;
+}
+
+@media screen and (max-width: 768px) {
+  .place-title {
+    top: 0px;
+    font-size: 18px;
+  }
+}

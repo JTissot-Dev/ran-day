@@ -1,10 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import Layout from './Layout'
 import './index.css'
+import { AlertContextProvider } from './contexts/AlertContextProvider'
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <AlertContextProvider>
+      <Layout />
+    </AlertContextProvider>
   </React.StrictMode>,
 )

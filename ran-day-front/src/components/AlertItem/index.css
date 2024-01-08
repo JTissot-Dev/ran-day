@@ -1,0 +1,41 @@
+.alert {
+  position: fixed;
+  top: 65px;
+  left: 0;
+  right: 0;
+  margin: 0 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border-radius: 10px;
+  z-index: 3;
+  font-size: 14px;
+}
+
+.alert button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+.close-icon {
+  width: 23px;
+  height: 23px;
+}
+
+.error-display {
+  background-color: rgba(175, 173, 173, 0.322);
+  backdrop-filter: blur(10px);
+  color: rgb(88, 86, 86);
+}
+
+.success-display {
+  background-color: rgba(4, 93, 5, 0.135);
+  backdrop-filter: blur(10px);
+  color: rgba(4, 96, 16, 0.63);
+}
