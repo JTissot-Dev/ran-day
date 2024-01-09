@@ -1,5 +1,5 @@
 .container {
-  padding: 120px 160px 50px 160px;
+  padding: 120px 240px 50px 240px;
 }
 
 .bg-hide {
@@ -10,6 +10,18 @@
   right: 0;
   left: 0;
   z-index: 5;
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1536px) {
+  .container {
+    padding: 120px 180px 50px 180px;
+  }
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1370px) {
+  .container {
+    padding: 120px 160px 50px 160px;
+  }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1280px) {

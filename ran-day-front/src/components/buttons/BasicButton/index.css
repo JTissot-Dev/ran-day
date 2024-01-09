@@ -1,0 +1,15 @@
+.btn-basic {
+  padding: 9px 30px 9px 30px;
+  border: none;
+  border-radius: 10px;
+  color: #FDFDFF;
+  font-weight: 600;
+  font-size: large;
+  background-color: #5200FF;
+  position: relative;
+  cursor: pointer;
+}
+
+.btn-basic:hover {
+  opacity: 90%;
+}

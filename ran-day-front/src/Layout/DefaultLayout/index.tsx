@@ -1,15 +1,14 @@
 import './index.css'
 import { useState } from 'react'
-import { RouterProvider } from "react-router-dom"
+import { Outlet } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import router from "../router"
-import Header from "../components/Header"
-import Footer from '../components/Footer'
-import Alert from '../components/AlertItem'
-import { useAlertContext } from '../contexts/AlertContextProvider'
+import Header from "../../components/Header"
+import Footer from '../../components/Footer'
+import Alert from '../../components/AlertItem'
+import { useAlertContext } from '../../contexts/AlertContextProvider'
 
 
-const Layout: React.FC = () => {
+const DefaultLayout: React.FC = () => {
 
   const {alert} = useAlertContext();
   const [backgroundHide, setBackgroundHide] = useState<boolean>(false);
@@ -27,7 +26,7 @@ const Layout: React.FC = () => {
           />
       }
       <main className="container">
-        <RouterProvider router={ router } />
+        <Outlet />
       </main>
       <Footer />
       {
@@ -51,4 +50,4 @@ const Layout: React.FC = () => {
   )
 }
 
-export default Layout
+export default DefaultLayout

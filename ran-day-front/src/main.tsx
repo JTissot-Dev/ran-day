@@ -1,14 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Layout from './Layout'
 import './index.css'
+import { RouterProvider } from 'react-router-dom'
 import { AlertContextProvider } from './contexts/AlertContextProvider'
+import router from './router'
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AlertContextProvider>
-      <Layout />
+      <RouterProvider router={ router } />
     </AlertContextProvider>
   </React.StrictMode>,
 )

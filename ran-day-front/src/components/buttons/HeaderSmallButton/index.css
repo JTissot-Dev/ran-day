@@ -6,3 +6,7 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.btn-header-s:hover {
+  background-color: #f3f3f7a3;
+}

@@ -14,3 +14,7 @@
   font-weight: 600;
   font-size: 15px;
 }
+
+.btn-header:hover {
+  background-color: #f3f3f7a3;
+}

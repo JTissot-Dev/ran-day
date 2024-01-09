@@ -82,6 +82,7 @@ const PlaceInput = () => {
     <div className='place'>
       <BsGeoAlt className='place-icon'/>
       <input 
+          id="city"
           name="city"
           ref={ placeInputRef }
           className="place-input"
