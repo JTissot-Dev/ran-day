@@ -5,7 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DatePicker } from '@mui/x-date-pickers'
 import { Dayjs } from 'dayjs'
-import PlaceInput from '../PlaceInput'
+import PlaceInput from '../forms/PlaceInput'
 
 
 const SearchForm: React.FC = () => {

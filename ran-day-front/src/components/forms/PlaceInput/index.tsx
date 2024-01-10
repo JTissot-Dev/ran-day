@@ -1,7 +1,7 @@
 import './index.css'
 import { useEffect, useState, useRef } from 'react'
 import { BsGeoAlt } from "react-icons/bs"
-import { useAlertContext } from '../../contexts/AlertContextProvider'
+import { useAlertContext } from '../../../contexts/AlertContextProvider'
 
 interface City {
   nom: string,
