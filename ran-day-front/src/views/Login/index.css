@@ -36,6 +36,13 @@
   color: rgb(96, 95, 95);
 }
 
+.login-error {
+  height: 5px;
+  color: #D32F2F;
+  font-size: 0.8rem;
+  margin-bottom: -10px;
+}
+
 .container-btn, .container-btn-step {
   width: 100%;
   display: flex;
@@ -84,6 +91,7 @@
     width: 100%;
     border: none;
     margin-bottom: 70px;
+    padding: 45px 20px 20px 20px;
   }
 
   .container-title {

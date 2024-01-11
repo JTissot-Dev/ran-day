@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import Header from "../../components/Header"
 import Footer from '../../components/Footer'
-import Alert from '../../components/AlertItem'
+import AlertItem from '../../components/AlertItem'
 import { useAlertContext } from '../../contexts/AlertContextProvider'
 
 
@@ -20,9 +20,10 @@ const DefaultLayout: React.FC = () => {
       />
       {
         alert.message &&
-          <Alert 
+          <AlertItem 
             type={alert.type} 
-            message={alert.message} 
+            message={alert.message}
+            layout={alert.layout}
           />
       }
       <main className="container">

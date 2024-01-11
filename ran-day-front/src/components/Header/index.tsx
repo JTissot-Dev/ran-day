@@ -1,16 +1,18 @@
 import './index.css'
 import { ReactElement, useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 import { scroll } from "framer-motion"
 import { BsPersonCircle } from "react-icons/bs"
 import { BsFillPersonFill } from "react-icons/bs"
+import { BsPersonPlusFill } from "react-icons/bs";
 import BrandIcon from '../icons/BrandIcon'
-import HeaderButton from '../buttons/HeaderButton'
-import HeaderSmallButton from '../buttons/HeaderSmallButton'
+import LoginButton from '../buttons/HeaderButton/LoginButton'
+import LoginSmallButton from '../buttons/HeaderButton/LoginSmallButton'
 import useDimensions, { Dimensions } from '../../hooks/useDimension'
 import NavToggle from '../NavBar/NavToggle'
 import NavBar from '../NavBar'
+import AccountButton from '../buttons/HeaderButton/AccountButton'
+import { useAuthContext } from '../../contexts/AuthContextProvider'
 
 
 interface Props {
@@ -28,7 +30,7 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
   const screenSize: Dimensions = useDimensions();
   const [isOpen, toggleOpen] = useState<boolean>(false);
   const headerRef = useRef<HTMLElement | null>(null);
-
+  const { currentUser } = useAuthContext();
 
   scroll((progress: number) => {
     if (progress > 0 && headerRef.current) {
@@ -40,19 +42,33 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
     }
   })
 
-  const headerButton: ReactElement = screenSize.width < 700 ?
-        <HeaderSmallButton 
-          icon={ 
-            <BsFillPersonFill className="icon-btn-h"/> 
-          }
-        /> :
-        <HeaderButton 
-          icon = { 
-            <BsPersonCircle className="icon-btn-h" /> 
-          } 
-        >
-          Se connecter
-        </HeaderButton>
+  const loginButton: ReactElement = screenSize.width < 700 ?
+    <LoginSmallButton 
+      icon={ 
+        <BsFillPersonFill className="icon-btn-h"/> 
+      }
+      path="/login"
+    /> :
+    <LoginButton 
+      icon = { 
+        <BsPersonCircle className="icon-btn-h" /> 
+      } 
+      path="/login"
+    >
+      Se connecter
+    </LoginButton>
+  
+  const signupButton: ReactElement|false = screenSize.width > 700 &&
+    <LoginButton
+      icon={ 
+        <BsPersonPlusFill className="icon-btn-h" /> 
+      }
+      path="/signup" 
+    >
+      S'inscrire
+    </LoginButton>
+
+    console.log(currentUser);
         
   return (
     <header 
@@ -61,9 +77,18 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
     >
       <BrandIcon />
       <div className="header-util">
-        { 
-          headerButton 
+        {
+          currentUser.token ?
+            <AccountButton 
+              firstName={ currentUser.user.firstName }
+              lastName={ currentUser.user.lastName }
+            /> :
+            <>
+              { loginButton }
+              { signupButton }
+            </>
         }
+
         {
           createPortal(
             <NavToggle

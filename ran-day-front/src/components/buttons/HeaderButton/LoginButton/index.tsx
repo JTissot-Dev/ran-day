@@ -3,19 +3,23 @@ import { ReactElement, ReactNode } from "react"
 import { useNavigate } from 'react-router-dom'
 
 
-interface Props {
+export interface Props {
   icon: ReactElement,
   children: ReactNode,
+  path: string
 }
 
-const HeaderButton: React.FC<Props> = ({icon, children}) => {
+const LoginButton: React.FC<Props> = ({
+  icon, 
+  children,
+  path}) => {
 
   const navigate = useNavigate();
 
   return (
     <button 
       className="btn-header"
-      onClick={() => navigate("/login")}
+      onClick={() => navigate(path)}
     >
         { icon }
       <span>
@@ -25,4 +29,4 @@ const HeaderButton: React.FC<Props> = ({icon, children}) => {
   )
 }
 
-export default HeaderButton
+export default LoginButton

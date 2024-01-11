@@ -1,5 +1,5 @@
 import './index.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { 
@@ -9,6 +9,7 @@ import {
   LinearProgress } from '@mui/material'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useAuthContext } from '../../contexts/AuthContextProvider'
+import { useAlertContext } from '../../contexts/AlertContextProvider'
 import axiosClient from '../../axiosClient'
 import BrandIcon from '../../components/icons/BrandIcon'
 import BasicButton from '../../components/buttons/BasicButton'
@@ -39,9 +40,9 @@ const Signup: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [signupError, setSignupError] = useState<string>('');
   const { dispatch, currentUser } = useAuthContext();
+  const { setAlert } = useAlertContext(); 
   const navigate = useNavigate();
   
-
 
   const handleName = () => {
     trigger(["firstName", "lastName"]).then(isValid => {
@@ -55,9 +56,15 @@ const Signup: React.FC = () => {
     })
   }
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  useEffect(() => {
+    formStep === 1 ? setFocus("firstName") :
+    formStep === 2 ? setFocus("email") :
+    formStep === 3 && setFocus("password"); 
+  }, [formStep])
+
+  const onSubmit: SubmitHandler<IFormInput> = (formData) => {
     setLoading(true);
-    const { firstName, lastName, email, password } = data;
+    const { firstName, lastName, email, password } = formData;
     axiosClient.post('/signup', {
       firstName,
       lastName,
@@ -83,6 +90,12 @@ const Signup: React.FC = () => {
       setLoading(false);
       if (response && response.status === 422) {
         setSignupError("L'adresse email ou le mot de passe saisie existe déjà.");
+      } else {
+        setAlert({
+          type: "Error", 
+          message: "Une erreur est survenue, veuillez actualiser la page.",
+          layout: "Guest"
+        }); 
       }
     })
   }
@@ -182,7 +195,7 @@ const Signup: React.FC = () => {
                 variant="outlined" 
                 fullWidth
                 error={ errors.email ? true : false }
-                helperText={ errors.email && "Email Incorrect" }
+                helperText={ errors.email && "Email invalide" }
                 sx={{
                   '.MuiInputBase-root': {
                     borderRadius: '15px'

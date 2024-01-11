@@ -2,7 +2,8 @@ import { ReactNode, createContext, useContext, useState } from "react"
 
 export interface Alert {
   type: string,
-  message: string
+  message: string,
+  layout: string
 }
 
 interface AlertValues {
@@ -17,7 +18,8 @@ interface Props {
 const alertContext = createContext<AlertValues>({
   alert: {
     type: '',
-    message: ''
+    message: '',
+    layout: ''
   },
   setAlert: () => {}
 })
@@ -26,7 +28,8 @@ export const AlertContextProvider: React.FC<Props> = ({children}) => {
 
   const [alert, setAlert] = useState<Alert>({
     type: '',
-    message: ''
+    message: '',
+    layout: ''
   });
 
   return (

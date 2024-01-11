@@ -1,13 +1,16 @@
 import './index.css'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { 
   TextField, 
   Checkbox, 
   FormControlLabel,
   LinearProgress } from '@mui/material'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm, SubmitHandler, set } from 'react-hook-form'
+import { useAuthContext } from '../../contexts/AuthContextProvider'
+import { useAlertContext } from '../../contexts/AlertContextProvider'
+import axiosClient from '../../axiosClient'
 import BrandIcon from '../../components/icons/BrandIcon'
 import BasicButton from '../../components/buttons/BasicButton'
 
@@ -31,8 +34,47 @@ const Login: React.FC = () => {
   const [formStep, setFormStep] = useState<number>(1);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [loginError, setLoginError] = useState<string>('');
+  const { dispatch } = useAuthContext(); 
+  const { setAlert } = useAlertContext();  
+  const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  useEffect(() => {
+    formStep === 1 ? setFocus("email") :
+    formStep === 2 && setFocus("password");
+  }, [formStep])
+
+  const onSubmit: SubmitHandler<IFormInput> = (formData) => {
+    setLoading(true);
+    axiosClient.post('/login', formData)
+      .then(({data}) => {
+        dispatch({
+          type: "authentication",
+          value: {
+            user: {
+              firstName: data.firstName,
+              lastName: data.lastName,
+              email: data.email,
+            },
+            token: data.token
+          }
+        })
+        setLoading(false);
+        navigate("/index");
+      })
+      .catch(({response}) => {
+        setLoading(false);
+        if (response && response.status === 422) {
+          setLoginError("Email ou mot de passe invalide");
+        } else {
+          setAlert({
+            type: "Error",
+            message: "Une erreur est survenue, veuillez actualiser la page",
+            layout: "Default"
+          });
+        }
+      })
+  }
 
   const handleEmailStep = () => {
     trigger("email").then(isValid => {
@@ -40,7 +82,6 @@ const Login: React.FC = () => {
     })
   }
 
-  console.log(errors)
 
   return (
     <form 
@@ -73,7 +114,7 @@ const Login: React.FC = () => {
                 variant="outlined" 
                 fullWidth
                 error={ errors.email ? true : false }
-                helperText={ errors.email && "Email Incorrect" }
+                helperText={ errors.email && "Email invalide" }
                 sx={{
                   '.MuiInputBase-root': {
                     borderRadius: '15px'
@@ -142,6 +183,7 @@ const Login: React.FC = () => {
                 Suivant
               </BasicButton>
             </div>
+            <p className="login-error">{ loginError }</p>
           </motion.div>
         }
       </div>

@@ -26,7 +26,7 @@
 }
 
 .btn-search:hover {
-  opacity: 90%;
+  background-color: #4904dd;
 }
 
 @media screen and (min-width: 940px) and (max-width: 1166px) {
