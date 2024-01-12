@@ -2,6 +2,7 @@ import { ReactNode, createContext, useContext, useReducer } from "react"
 
 
 interface User {
+  userId: number|null,
   firstName: string,
   lastName: string,
   email: string,
@@ -14,6 +15,7 @@ interface CurrentUser {
 
 type AuthAction =
   | { type: "authentication"; value: CurrentUser }
+  | { type: "refresh"; value: User }
 
 interface Auth {
   currentUser: CurrentUser
@@ -27,6 +29,7 @@ interface Props {
 const authContext = createContext<Auth>({
   currentUser: {
     user: {
+      userId: null,
       firstName: '',
       lastName: '',
       email: '',
@@ -49,6 +52,7 @@ const reducer = (state: CurrentUser, action: AuthAction) => {
     case 'authentication': {
       const newState = {
         user: {
+          userId: action.value.user.userId,
           firstName: action.value.user.firstName,
           lastName: action.value.user.lastName,
           email: action.value.user.email,
@@ -56,7 +60,19 @@ const reducer = (state: CurrentUser, action: AuthAction) => {
         token: action.value.token
       }
       setToken(newState.token);
-      return (newState);
+      return newState;
+    }
+    case 'refresh': {
+      console.log(action)
+      return {
+        ...state,
+        user: {
+          userId: action.value.userId,
+          firstName: action.value.firstName,
+          lastName: action.value.lastName,
+          email: action.value.email
+        }
+      }
     }
     default:
       return state;
@@ -68,6 +84,7 @@ export const AuthContextProvider: React.FC<Props> = ({children}) => {
 
   const initialUserState: CurrentUser = {
     user: {
+      userId: null,
       firstName: '',
       lastName: '',
       email: ''

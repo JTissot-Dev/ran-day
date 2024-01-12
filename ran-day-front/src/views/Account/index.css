@@ -1,0 +1,92 @@
+.account-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.account-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #23272F;
+  width: fit-content;
+  flex-wrap: wrap;
+}
+
+
+.account-icon {
+  width: 35px;
+  height: 35px;
+  margin-bottom: 6px;
+}
+
+.input-account-form {
+  height: 60px;
+}
+
+.account-title {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: 1.4rem;
+  margin-left: 20px;
+}
+
+.account-form {
+  margin: 100px 0 70px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 580px;
+}
+
+.account-form div:first-child {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.save-button {
+  float: right;
+  padding: 12px 20px 12px 20px;
+  border: none;
+  border-radius: 15px;
+  color: #FDFDFF;
+  font-weight: 600;
+  font-size: large;
+  background-color: #5200FF;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: #4904dd;
+}
+
+.account-form div:nth-child(2), div:nth-child(3) {
+  width: 100%;
+}
+
+.account-form div:nth-child(3) {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 640px) {
+  .account-form {
+    margin-top: 60px;
+    width: 100%;
+  }
+
+  .account-form div:first-child {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+
+  .account-title {
+    font-size: 1.05rem;
+  }
+  
+}

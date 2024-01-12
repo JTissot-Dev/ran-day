@@ -4,6 +4,7 @@ import GuestLayout from "./Layout/GuestLayout"
 import Home from "./views/Home"
 import Login from "./views/Login"
 import Signup from "./views/Signup"
+import Account from "./views/Account"
 
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/index",
         element: <Home />
+      },
+      {
+        path: "/account",
+        element: <Account />
       }
     ]
   },

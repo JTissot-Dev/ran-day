@@ -14,8 +14,8 @@ const AlertItem: React.FC<Alert> = ({type, message, layout}) => {
   '';
 
   const alertLayout = 
-  type === 'Default' ? 'default-layout' :
-  type === 'Guest' ? 'guest-layout' :
+  layout === 'Default' ? 'default-layout' :
+  layout === 'Guest' ? 'guest-layout' :
   '';
 
   return (

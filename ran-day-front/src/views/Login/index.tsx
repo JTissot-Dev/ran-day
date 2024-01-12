@@ -52,6 +52,7 @@ const Login: React.FC = () => {
           type: "authentication",
           value: {
             user: {
+              userId: data.userId,
               firstName: data.firstName,
               lastName: data.lastName,
               email: data.email,

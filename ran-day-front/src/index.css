@@ -5,3 +5,8 @@ body {
   background-color: #FDFDFF;
   font-family: sans-serif;
 }
+
+#root {
+  min-width: 100%;
+  min-height: 100vh;
+}

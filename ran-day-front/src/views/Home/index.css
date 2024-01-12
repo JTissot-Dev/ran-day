@@ -3,6 +3,7 @@
   grid-template-columns: repeat(12, 1fr);
   column-gap: 10px;
   row-gap: 50px;
+  margin-bottom: 180px;
 }
 
 .welcome {

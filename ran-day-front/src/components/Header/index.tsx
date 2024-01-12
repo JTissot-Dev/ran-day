@@ -1,6 +1,7 @@
 import './index.css'
 import { ReactElement, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { Link } from 'react-router-dom'
 import { scroll } from "framer-motion"
 import { BsPersonCircle } from "react-icons/bs"
 import { BsFillPersonFill } from "react-icons/bs"
@@ -67,15 +68,17 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
     >
       S'inscrire
     </LoginButton>
-
-    console.log(currentUser);
         
   return (
     <header 
       ref={ headerRef }
       className="header h-base"
     >
-      <BrandIcon />
+      <Link
+        to="/index"
+      >
+        <BrandIcon />
+      </Link>
       <div className="header-util">
         {
           currentUser.token ?

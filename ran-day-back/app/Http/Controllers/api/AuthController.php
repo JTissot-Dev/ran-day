@@ -7,12 +7,11 @@ use App\Http\Requests\SignupRequest;
 use App\Http\Requests\LoginRequest;
 use Exception;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function signup(SignupRequest $request): JsonResponse
+    public function signup(SignupRequest $request)
     {
         try {
             $data = $request->validated();
@@ -26,6 +25,7 @@ class AuthController extends Controller
             $token = $user->createToken('token')->plainTextToken;
             
             return response()->json([
+                'userId' => $user->id,
                 'firstName' => $user->first_name,
                 'lastName' => $user->last_name,
                 'email' => $user->email,
@@ -36,7 +36,7 @@ class AuthController extends Controller
         }
     }
 
-    public function login(LoginRequest $request): JsonResponse
+    public function login(LoginRequest $request)
     {
         try {
             $crendentials = $request->validated();
@@ -52,6 +52,7 @@ class AuthController extends Controller
             $token = $user->createToken('token')->plainTextToken;
         
             return response()->json([
+                'userId' => $user->id,
                 'firstName' => $user->first_name,
                 'lastName' => $user->last_name,
                 'email' => $user->email,

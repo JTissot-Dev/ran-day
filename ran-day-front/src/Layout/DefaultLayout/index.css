@@ -1,5 +1,10 @@
+.layout {
+  min-height: 100vh;
+  position: relative;
+}
+
 .container {
-  padding: 120px 240px 50px 240px;
+  padding: 110px 240px 50px 240px;
 }
 
 .bg-hide {
@@ -14,31 +19,31 @@
 
 @media screen and (min-width: 1280px) and (max-width: 1536px) {
   .container {
-    padding: 120px 180px 50px 180px;
+    padding: 110px 180px 50px 180px;
   }
 }
 
 @media screen and (min-width: 1280px) and (max-width: 1370px) {
   .container {
-    padding: 120px 160px 50px 160px;
+    padding: 110px 160px 50px 160px;
   }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1280px) {
   .container {
-    padding: 120px 110px 50px 110px;
+    padding: 110px 110px 50px 110px;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .container {
-    padding: 120px 80px 50px 80px;
+    padding: 110px 80px 50px 80px;
   }
 }
 
 @media screen and (min-width: 640px) and (max-width: 768px) {
   .container {
-    padding: 120px 50px 50px 50px;
+    padding: 110px 50px 50px 50px;
   }
 }
 

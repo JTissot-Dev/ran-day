@@ -4,7 +4,9 @@ import './index.css'
 const Footer: React.FC = () => {
   return (
     <footer className="footer">
-      <p>©Copyright 2023 - RanDay</p>
+      <div className="border">
+        <p>©Copyright 2023 - RanDay</p>
+      </div>
     </footer>
   )
 }

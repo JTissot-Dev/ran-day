@@ -1,15 +1,41 @@
 .account-button {
-  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   background-color: #5200FF;
   border-radius: 100%;
   font-family: sans-serif;
   font-weight: 500;
-  font-size: 17px;
   color: #FDFDFF;
+
+}
+
+.account-allowed {
+  font-size: 17px;
+  width: 38px;
+  height: 38px;
   cursor: pointer;
 }
 
-.account-button:hover {
+.account-disabled {
+  font-size: 25px;
+  width: 54px;
+  height: 54px;
+}
+
+.account-allowed:hover {
   background-color: #4904dd;
+}
+
+.account-button span {
+  margin-top: 2px;
+}
+
+@media screen and (max-width: 640px) {
+  .account-disabled {
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+  }
 }
