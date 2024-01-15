@@ -15,16 +15,28 @@ interface City {
   _score: number
 }
 
-const PlaceInput = () => {
+interface PlaceInputProps {
+  placeInput: string,
+  setPlaceInput: React.Dispatch<React.SetStateAction<string>>
+}
+
+const PlaceInput: React.FC<PlaceInputProps> = ({placeInput, setPlaceInput}) => {
 
   const [cities, setCities] = useState<City[]>([]);
   const [citySelect, setCitySelect] = useState<boolean>(false);
-  const [placeInput, setPlaceInput] = useState<string>('');
+  
   const placeInputRef = useRef<HTMLInputElement|null>(null);
   const placeLabelRef = useRef<HTMLLabelElement|null>(null);
   const {setAlert} = useAlertContext();
 
   useEffect(() => {
+
+    if (!placeInputRef.current) return;
+
+    if (placeInputRef.current.value === "" && placeLabelRef.current?.classList.contains('place-label-complete')) {
+      placeLabelRef.current?.classList.remove('place-label-complete');
+    }
+    
     fetch(`https://geo.api.gouv.fr/communes?nom=${placeInput}&limit=5`)
     .then((response) => {
       if (!response.ok) {
@@ -35,10 +47,11 @@ const PlaceInput = () => {
     .then((data: City[]) => {
       setCities(data);
     })
-    .catch((error: Error) => {
+    .catch(() => {
       setAlert({
         type: 'Error',
-        message: error.message
+        message: 'Une erreur est survenue veuillez actualiser la page.',
+        layout: 'Default'
       })
     })
   }, [placeInput]);

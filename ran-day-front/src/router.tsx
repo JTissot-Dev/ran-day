@@ -5,6 +5,7 @@ import Home from "./views/Home"
 import Login from "./views/Login"
 import Signup from "./views/Signup"
 import Account from "./views/Account"
+import Program from "./views/Program"
 
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/account",
         element: <Account />
+      },
+      {
+        path: "/program",
+        element: <Program />
       }
     ]
   },

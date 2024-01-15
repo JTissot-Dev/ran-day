@@ -1,0 +1,41 @@
+.program-container {
+  margin-top: 50px;
+  margin-bottom: 150px;
+  min-width: 100%;
+}
+
+.program-container h1 {
+  margin-top: 50px;
+  font-size: 1.5rem;
+}
+
+.program-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.program-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+}
+
+.program-infos {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.info-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+}
+
+.program-infos div {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}

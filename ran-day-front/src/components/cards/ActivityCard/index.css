@@ -1,0 +1,77 @@
+.activity-container {
+  width: 100%;
+  display: flex;
+  padding: 15px;
+  border-radius: 15px;
+  border: solid 1px #e0e0e0;
+}
+
+.activity-img {
+  width: 300px;
+  height: auto;
+  border-radius: 15px;
+  margin-right: 20px;
+}
+
+.activity-container h2 {
+  font-size: 1.4rem;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  color: #1565c0;
+}
+
+.activity-container p {
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.activity-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.activity-detail a{
+  display: flex;
+  align-items: center;
+  float: inline-end;
+  padding: 0 15px 0 15px;
+  height: 35px;
+  border-radius: 99999px;
+  background-color: #5200FF;
+  color: #FDFDFF;
+  text-decoration: none;
+  font-size: small;
+}
+
+.activity-detail a:hover {
+  background-color: #4904dd;
+}
+
+.geo-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 640px) {
+  .activity-container {
+    flex-direction: column;
+    padding: 0px;
+  }
+
+  .activity-img {
+    width: 100%;
+    height: auto;
+    margin-right: 0px;
+    margin-bottom: 20px;
+    border-radius: 15px 15px 0px 0px;
+  }
+
+  .activity-detail {
+    padding: 20px;
+    width: 90%;
+  }
+  
+}
