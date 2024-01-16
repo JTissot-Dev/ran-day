@@ -5,9 +5,23 @@
 }
 
 .program-container h1 {
-  margin-top: 50px;
+  color: #222222;
   font-size: 1.5rem;
 }
+
+.button-container {
+  display: flex;
+}
+.button-container button:first-child {
+  margin-right: 15px;
+}
+
+.program-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+} 
 
 .program-layout {
   display: flex;
@@ -25,10 +39,17 @@
 .program-infos {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 10px;
+  color: #5B5B5B;
 }
 
-.info-icon {
+.info-geo-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 12px;
+}
+
+.info-date-icon {
   width: 20px;
   height: 20px;
   margin-right: 12px;
@@ -37,5 +58,5 @@
 .program-infos div {
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }

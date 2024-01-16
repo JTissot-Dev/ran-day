@@ -4,9 +4,12 @@ body {
   min-height: 100vh;
   background-color: #FDFDFF;
   font-family: sans-serif;
+  box-sizing: border-box;
 }
 
 #root {
   min-width: 100%;
   min-height: 100vh;
+  position: relative;
+  box-sizing: border-box;
 }

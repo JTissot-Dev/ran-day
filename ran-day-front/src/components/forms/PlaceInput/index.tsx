@@ -2,6 +2,8 @@ import './index.css'
 import { useEffect, useState, useRef } from 'react'
 import { BsGeoAlt } from "react-icons/bs"
 import { useAlertContext } from '../../../contexts/AlertContextProvider'
+import { FormError } from '../../SearchForm'
+
 
 interface City {
   nom: string,
@@ -16,11 +18,17 @@ interface City {
 }
 
 interface PlaceInputProps {
+  formError: FormError,
+  setFormError: React.Dispatch<React.SetStateAction<FormError>>,
   placeInput: string,
   setPlaceInput: React.Dispatch<React.SetStateAction<string>>
 }
 
-const PlaceInput: React.FC<PlaceInputProps> = ({placeInput, setPlaceInput}) => {
+const PlaceInput: React.FC<PlaceInputProps> = ({
+  formError, 
+  setFormError,
+  placeInput, 
+  setPlaceInput}) => {
 
   const [cities, setCities] = useState<City[]>([]);
   const [citySelect, setCitySelect] = useState<boolean>(false);
@@ -32,6 +40,12 @@ const PlaceInput: React.FC<PlaceInputProps> = ({placeInput, setPlaceInput}) => {
   useEffect(() => {
 
     if (!placeInputRef.current) return;
+    if (formError.place) {
+      setFormError({
+        ...formError,
+        place: false
+      })
+    }
 
     if (placeInputRef.current.value === "" && placeLabelRef.current?.classList.contains('place-label-complete')) {
       placeLabelRef.current?.classList.remove('place-label-complete');
@@ -55,6 +69,17 @@ const PlaceInput: React.FC<PlaceInputProps> = ({placeInput, setPlaceInput}) => {
       })
     })
   }, [placeInput]);
+
+  useEffect(() => {
+    if (formError.place) {
+      placeInputRef.current?.focus();
+      placeInputRef.current?.classList.add('input-error');
+    } else {
+      if (placeInputRef.current?.classList.contains('input-error')) {
+        placeInputRef.current?.classList.remove('input-error');
+      }
+    }
+  }, [formError.place])
 
   const handleCity = (city: string) => {
     setPlaceInput(city);
@@ -104,7 +129,6 @@ const PlaceInput: React.FC<PlaceInputProps> = ({placeInput, setPlaceInput}) => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPlaceInput(e.target.value)}
           onFocus={() => setCitySelect(true)}
           onBlur={handleBlurPlace}
-          required
           autoComplete="off"
       />
       <label 

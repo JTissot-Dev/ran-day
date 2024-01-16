@@ -7,7 +7,7 @@
   font-size: 17px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
-  color: rgba(69, 68, 68, 0.762);
+  color: rgba(69, 68, 68, 0.721);
   position: absolute;
   pointer-events: none;
   left: 14px;
@@ -20,7 +20,7 @@
 .place-icon {
   position: absolute;
   right: 10px;
-  top: 15px;
+  top: 16px;
   width: 23px;
   height:23px;
   color: rgba(20, 20, 20, 0.655);
@@ -28,13 +28,14 @@
 }
 
 .place-input {
+  width: 100%;
   position: relative;
   padding: 17.5px 40px 17.5px 15px;
   border: 1px solid rgba(128, 128, 128, 0.537);
   border-radius: 15px;
   font-size: medium;
   box-sizing: border-box;
-  width: 350px;
+  height: 57px;
   color: rgba(23, 23, 23, 0.855);
 }
 
@@ -97,7 +98,7 @@
 .cities-display li button {
   height: 100%;
   width: 100%;
-  padding: 18px 8px 18px 15px;
+  padding: 16px 8px 16px 15px;
   border: none;
   background-color: transparent;
   font-size: 17px;
@@ -109,24 +110,35 @@
 }
 
 .cities-display li button:hover {
-  background-color: #f4f0f093;
+  background-color: #f5f5f5;
 }
 
 .no-result {
-  padding: 18px 8px 18px 15px;
+  padding: 16px 8px 16px 15px;
   font-size: 17px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
   color: rgba(69, 68, 68, 0.762);
 }
 
-@media screen and (min-width: 940px) and (max-width: 1166px) {
-  .place-input {
-    width: 280px;
-  }
+.input-error {
+  border: 1px solid #DA5050;
 }
 
-@media screen and (max-width: 940px) {
+.input-error:focus {
+  outline-color: #DA5050;
+}
+
+.input-error:hover {
+  border-color: #DA5050;
+}
+
+.input-error:focus ~ label, .input-error ~ label {	
+  color: #DA5050;
+}
+
+
+@media screen and (max-width: 970px) {
   .place-input {
     width: 100%;
     margin-bottom: 20px;

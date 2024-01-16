@@ -28,8 +28,6 @@ const Account: React.FC = () => {
     register, 
     handleSubmit,
     formState: { errors },
-    setFocus,
-    clearErrors,
     reset,
      } = useForm<AccountFormInput>();
 
@@ -105,7 +103,7 @@ const Account: React.FC = () => {
         </h1>
       </div>
       <form 
-        className="account-form"
+        className="form-account"
         onSubmit={e => {
             e.preventDefault();
             handleSubmit(onSubmit)(e)
@@ -123,9 +121,11 @@ const Account: React.FC = () => {
               error={ errors.firstName ? true : false }
               helperText={ errors.firstName && "Saisir votre Prénom" }
               sx={{
+                width: '100%',
                 marginRight: '20px',
                 '.MuiInputBase-root': {
                   borderRadius: '15px',
+                  
                 }
               }}
             />
@@ -139,13 +139,15 @@ const Account: React.FC = () => {
             error={ errors.lastName ? true : false }
             helperText={ errors.lastName && "Saisir votre Nom" }
             sx={{
+              width: '100%',
               '.MuiInputBase-root': {
                 borderRadius: '15px',
+                
               }
             }}
           />
           </div>
-          <div>
+          <div className="email-account-container">
             <TextField
               {...register("email", { 
                 required: true,
@@ -165,8 +167,8 @@ const Account: React.FC = () => {
               }}
             />
           </div>
-          <div>
-            <button className="save-button">
+          <div className="button-account-container">
+            <button className="save-button-account">
               Enregistrer
             </button>
           </div>

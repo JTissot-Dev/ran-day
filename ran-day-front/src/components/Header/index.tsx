@@ -2,7 +2,6 @@ import './index.css'
 import { ReactElement, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
-import { scroll } from "framer-motion"
 import { BsPersonCircle } from "react-icons/bs"
 import { BsFillPersonFill } from "react-icons/bs"
 import { BsPersonPlusFill } from "react-icons/bs";
@@ -32,16 +31,6 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
   const [isOpen, toggleOpen] = useState<boolean>(false);
   const headerRef = useRef<HTMLElement | null>(null);
   const { currentUser } = useAuthContext();
-
-  scroll((progress: number) => {
-    if (progress > 0 && headerRef.current) {
-      headerRef.current.classList.add('header-scroll');
-    } else {
-      if (headerRef.current && headerRef.current.classList.contains('header-scroll')) {
-        headerRef.current.classList.remove('header-scroll');
-      }
-    }
-  })
 
   const loginButton: ReactElement = screenSize.width < 700 ?
     <LoginSmallButton 
@@ -99,7 +88,7 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
               isOpen={ isOpen }
               setBackgroundHide={ setBackgroundHide }
             />,
-            document.body
+            document.getElementById('root') as HTMLElement
           )
         }
       </div>
