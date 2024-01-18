@@ -1,12 +1,17 @@
 import './index.css'
 import { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
+import { createPortal } from 'react-dom'
 import { motion } from 'framer-motion'
+import { 
+  Backdrop,
+  CircularProgress } from '@mui/material'
 import Header from "../../components/Header"
 import Footer from '../../components/Footer'
 import AlertItem from '../../components/AlertItem'
 import { useAlertContext } from '../../contexts/AlertContextProvider'
 import { useAuthContext } from '../../contexts/AuthContextProvider'
+import { useProgramContext } from '../../contexts/ProgramContextProvider'
 import axiosClient from '../../axiosClient'
 
 
@@ -15,6 +20,7 @@ const DefaultLayout: React.FC = () => {
   const {dispatch, currentUser} = useAuthContext();
 
   const {alert, setAlert} = useAlertContext();
+  const {loadingProgram } = useProgramContext();
   
   const [backgroundHide, setBackgroundHide] = useState<boolean>(false);
 
@@ -45,9 +51,30 @@ const DefaultLayout: React.FC = () => {
 
   return (
     <div className='layout'>
-      <Header 
-        setBackgroundHide={ setBackgroundHide }
-      />
+      {
+        loadingProgram &&
+          createPortal(
+            <Backdrop
+              sx={{ 
+                color: '#FDFDFF', 
+                zIndex: (theme) => theme.zIndex.drawer + 1
+              }}
+              open={true}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>,
+            document.body
+          )
+      }
+      {
+        createPortal(
+          <Header 
+          setBackgroundHide={ setBackgroundHide }
+        />,
+        document.getElementById('root') as HTMLElement
+        )
+      }
+
       {
         alert.message &&
           <AlertItem 
@@ -74,7 +101,6 @@ const DefaultLayout: React.FC = () => {
               ease: [1, 1, 1, 1]
             }}
           >
-            
           </motion.div>
       }
     </div>

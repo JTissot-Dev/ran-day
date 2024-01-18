@@ -1,10 +1,11 @@
 import './index.css'
 import { ReactElement, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { progress, scroll } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { BsPersonCircle } from "react-icons/bs"
 import { BsFillPersonFill } from "react-icons/bs"
-import { BsPersonPlusFill } from "react-icons/bs";
+import { BsPersonPlusFill } from "react-icons/bs"
 import BrandIcon from '../icons/BrandIcon'
 import LoginButton from '../buttons/HeaderButton/LoginButton'
 import LoginSmallButton from '../buttons/HeaderButton/LoginSmallButton'
@@ -25,12 +26,24 @@ export interface ChildProps {
   setBackgroundHide: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+
+
 const Header: React.FC<Props> = ({setBackgroundHide}) => {
 
   const screenSize: Dimensions = useDimensions();
   const [isOpen, toggleOpen] = useState<boolean>(false);
   const headerRef = useRef<HTMLElement | null>(null);
   const { currentUser } = useAuthContext();
+
+  scroll((progress) => {
+    if (progress > 0) {
+      headerRef.current?.classList.add('header-scroll');
+    } else {
+      if (headerRef.current?.classList.contains('header-scroll')) {
+        headerRef.current?.classList.remove('header-scroll');
+      }
+    }
+  })
 
   const loginButton: ReactElement = screenSize.width < 700 ?
     <LoginSmallButton 
@@ -60,6 +73,7 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
         
   return (
     <header 
+      id="header"
       ref={ headerRef }
       className="header h-base"
     >
@@ -83,14 +97,18 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
 
         {
           createPortal(
-            <NavToggle
-              toggle={toggleOpen} 
-              isOpen={ isOpen }
-              setBackgroundHide={ setBackgroundHide }
-            />,
+            <div className="toggle-container">
+              <NavToggle
+                toggle={toggleOpen} 
+                isOpen={ isOpen }
+                setBackgroundHide={ setBackgroundHide }
+              />
+            </div>,
             document.getElementById('root') as HTMLElement
           )
         }
+
+        
       </div>
       {
         isOpen &&
@@ -100,7 +118,7 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
               toggle={toggleOpen}
               setBackgroundHide={ setBackgroundHide }
             />,
-            document.body
+            document.getElementById('root') as HTMLElement
           )
 
       }

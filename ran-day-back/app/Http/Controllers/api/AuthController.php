@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignupRequest;
 use App\Http\Requests\LoginRequest;
+use Illuminate\Http\Request;
 use Exception;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;

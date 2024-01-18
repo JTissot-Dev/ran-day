@@ -1,6 +1,24 @@
 import './index.css'
 import { Coordinates } from "../../../views/Program"
 import { BsGeo } from "react-icons/bs";
+import { PiCoffeeLight } from "react-icons/pi";
+import { PiFilmSlateLight } from "react-icons/pi";
+import { PiHamburgerLight } from "react-icons/pi";
+import { PiIceCreamLight } from "react-icons/pi";
+import { PiPlantLight } from "react-icons/pi";
+import { PiMountainsLight } from "react-icons/pi";
+import { PiBankLight } from "react-icons/pi";
+import { PiBeerSteinLight } from "react-icons/pi";
+import { PiBroomLight } from "react-icons/pi";
+import { PiForkKnifeLight } from "react-icons/pi";
+import { PiGameControllerLight } from "react-icons/pi";
+import { PiParkLight } from "react-icons/pi";
+import { PiAnchorLight } from "react-icons/pi";
+import { PiBeerBottleLight } from "react-icons/pi";
+import { activityDetail } from '../../../constants/activityDetail';
+import { PiWavesLight } from "react-icons/pi";
+import { PiCoinsLight } from "react-icons/pi";
+import { PiCastleTurretLight } from "react-icons/pi";
 
 
 interface ActivityCardProps {
@@ -9,32 +27,47 @@ interface ActivityCardProps {
   coordinates: Coordinates
 }
 
-const activityDescription: any = {
-  coffee: "Rien de tel qu'un bon café pour bien démarrer la journée.",
-  attraction: "Vous allez aimer jouer les touristes !",
-  restaurant: "Une bonne adresse pour se régaler.",
-  museum: "Une visite culturelle pour enrichir votre journée.",
-  bar: "Un petit verre pour se détendre, consommez avec modération.",
-  park: "Un peu de verdure pour se ressourcer.",
-  cinema: "Un petit film pour se divertir.",
-  amusementArcade: "Un peu de fun pour se défouler.",
-  iceCream: "Une petite pause gourmande.",
-  natureReserve: "Connectez-vous à la nature.",
-  viewPoint: "Un point de vue à couper le souffle.",
-  bathingArea: "Un petit plongeon pour se rafraîchir.",
-  beachResort: "Un peu de sable fin pour se détendre.",
-  casino: "N'y jouez pas votre chemise !",
-  fastFood: "Mettez de côté vos bonnes résolutions.",
-  pub: "Un petit verre pour se détendre, consommez avec modération.",
-  nightclub: "Venez enflammer le dancefloor !",
-  artwork: "Une petite pause culturelle.",
-}
-
-
 const ActivityCard: React.FC<ActivityCardProps> = ({
   type, 
   name, 
   coordinates}) => {
+  
+  const activityIcon = type === "coffee" ? 
+      <PiCoffeeLight className="activity-icon-coffee"/> :
+    type === "attraction" ?
+      <PiCastleTurretLight className="activity-icon" /> :
+    type === "restaurant" ?
+      <PiForkKnifeLight className="activity-icon" /> :
+    type === "museum" ?
+      <PiBankLight className="activity-icon" /> :
+    type === "bar" ?
+      <PiBeerSteinLight className="activity-icon" /> :
+    type === "park" ?
+      <PiParkLight className="activity-icon" /> :
+    type === "cinema" ?
+      <PiFilmSlateLight className="activity-icon" /> :
+    type === "amusementArcade" ?
+      <PiGameControllerLight className="activity-icon" /> :
+    type === "iceCream" ?
+      <PiIceCreamLight className="activity-icon" /> :
+    type === "natureReserve" ?
+      <PiPlantLight className="activity-icon" /> :
+    type === "viewPoint" ?
+      <PiMountainsLight className="activity-icon" /> :
+    type === "baLightgArea" ?
+      <PiWavesLight className="activity-icon" /> :
+    type === "beachResort" ?
+      <PiAnchorLight className="activity-icon" /> :
+    type === "casino" ?
+      <PiCoinsLight className="activity-icon" /> :
+    type === "fastFood" ?
+      <PiHamburgerLight className="activity-icon" /> :
+    type === "pub" ?
+      <PiBeerSteinLight className="activity-icon" /> :
+    type === "nightclub" ?
+      <PiBeerBottleLight className="activity-icon" /> :
+    type === "artwork" &&
+      <PiBroomLight className="activity-icon" />
     
 
   return (
@@ -47,7 +80,11 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
       <div className='activity-detail'>
         <div>
           <h2>{ name }</h2>
-          <p>{ activityDescription[type] }</p>
+          <div className='activity-precision'>
+            { activityIcon }
+            <span>{ activityDetail[type].text }</span>
+          </div>
+          <p>{ activityDetail[type].description }</p>
         </div>
         <div>
           <a 

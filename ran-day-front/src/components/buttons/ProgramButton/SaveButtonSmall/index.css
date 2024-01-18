@@ -1,12 +1,11 @@
 .save-button-small {
   background-color: transparent;
   border: none;
-  height: 30px;
   cursor: pointer;
   color: #5B5B5B;
 }
 
 .save-icon-small {
-  width: 27px;
-  height: 27px;
+  width: 25px;
+  height: 25px;
 }

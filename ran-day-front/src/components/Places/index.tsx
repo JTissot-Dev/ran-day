@@ -1,6 +1,11 @@
 import './index.css'
 import PlaceCard from '../cards/PlaceCard'
 
+
+export interface placesProps {
+  getProgram: Function
+}
+
 export interface Place {
   title: string
   imgPath: string
@@ -12,16 +17,16 @@ const places: Place[] = [
     imgPath: "/img/place-lyon.jpg"
   },
   {
-    title: "Singapour",
-    imgPath: "/img/place-singapour.jpg"
+    title: "Paris",
+    imgPath: "/img/place-paris.jpg"
   },
   {
-    title: "Londre",
-    imgPath: "/img/place-london.jpg"
+    title: "Saint-Malo",
+    imgPath: "/img/place-saint-malo.jpg"
   },
   {
-    title: "Bruxelles",
-    imgPath: "/img/place-bruxelles.jpg"
+    title: "Bordeaux",
+    imgPath: "/img/place-bordeaux.jpg"
   },
   {
     title: "Strasbourg",
@@ -29,7 +34,7 @@ const places: Place[] = [
   }
 ]
 
-const Places: React.FC = () => {
+const Places: React.FC<placesProps> = ({getProgram}) => {
   return (
     <div>
       <h2 className="places-title">Destinations en un click</h2>
@@ -41,6 +46,7 @@ const Places: React.FC = () => {
                 key={ index }
                 title={ place.title }
                 imgPath={ place.imgPath }
+                getProgram={ getProgram }
               />
             )
           })

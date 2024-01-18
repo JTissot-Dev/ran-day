@@ -23,7 +23,6 @@ const NavToggle: React.FC<ChildProps> = ({ toggle, isOpen, setBackgroundHide }) 
       toggle(true);
       setBackgroundHide(true);
     }
-
   }
 
   return (

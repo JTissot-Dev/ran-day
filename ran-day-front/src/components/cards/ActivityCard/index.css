@@ -15,7 +15,7 @@
 .activity-container h2 {
   font-size: 1.3rem;
   margin-top: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   color: #222222;
 }
 
@@ -30,6 +30,34 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+}
+
+.activity-precision {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.activity-precision span {
+  margin-left: 7px;
+  font-style: italic;
+  font-weight: 100;
+  font-size: 1rem;
+  opacity: 0.8;
+  color: #717171;
+}
+
+.activity-icon {
+  width: 23px;
+  height: 23px;
+  color: #717171;
+}
+
+.activity-icon-coffee {
+  width: 23px;
+  height: 23px;
+  margin-bottom: 3px;
+  color: #717171;
 }
 
 .activity-detail a{

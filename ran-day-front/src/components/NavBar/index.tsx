@@ -8,6 +8,7 @@ import { BsHeart } from "react-icons/bs";
 import { BsBookmark } from "react-icons/bs";
 import { BsBoxArrowRight } from "react-icons/bs";
 
+
 const NavBar: React.FC<ChildProps> = ({isOpen, toggle, setBackgroundHide }) => {
 
   const { currentUser } = useAuthContext();

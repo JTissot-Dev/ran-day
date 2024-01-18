@@ -2,8 +2,10 @@ import './index.css'
 import { useProgramContext } from "../../contexts/ProgramContextProvider"
 import ActivityCard from "../../components/cards/ActivityCard"
 import SearchForm from '../../components/SearchForm'
-import { BsCalendar4Event } from "react-icons/bs"
-import { BsGeoAlt } from "react-icons/bs"
+import { 
+  BsGeoAlt,
+  BsCalendar4Event,
+  BsSliders2Vertical } from "react-icons/bs"
 import FavoryButton from '../../components/buttons/ProgramButton/FavoryButton'
 import FavoryButtonSmall from '../../components/buttons/ProgramButton/FavoryButtonSmall'
 import SaveButton from '../../components/buttons/ProgramButton/SaveButton'
@@ -17,12 +19,19 @@ export interface Coordinates {
   longitude: number
 }
 
+const programThemes: any = {
+  'classic-program': 'Classique',
+  'culture-program': 'Culture',
+  'outdoor-program': 'Nature',
+  'party-program': 'Festif'
+}
+
 
 const Program: React.FC = () => {
 
-  const {programCity, programs, programDate} = useProgramContext();
+  const {program} = useProgramContext();
   const screenSize: Dimensions = useDimensions();
-  const dateFormated: String | undefined = programDate?.format("DD/MM/YYYY");
+  const dateFormated: String | undefined = program.date?.format("DD/MM/YYYY");
 
   const favoryButton = screenSize.width < 768 ?
     <FavoryButtonSmall /> :
@@ -36,8 +45,8 @@ const Program: React.FC = () => {
     <div className="program-container">
       <SearchForm />
       {
-        programs.length > 0 && 
-        <>
+        program.activities.length > 0 && 
+        <div className="activities-container">
           <div className="program-head">
             <h1>Votre programme</h1>
             <div className="button-container">
@@ -48,34 +57,42 @@ const Program: React.FC = () => {
           <div className="program-infos">
             <div>
               <BsGeoAlt className="info-geo-icon"/>
-              <span>{ programCity }</span>
+              <span>{ program.city }</span>
             </div>
             <div>
               <BsCalendar4Event className="info-date-icon"/>
               <span>{ dateFormated }</span>
+            </div>
+            <div>
+              <BsSliders2Vertical className="info-theme-icon"/>
+              <span>{ programThemes[program.theme] }</span>
             </div>
           </div>
           
           <div className="program-layout">
             <div className="program-grid">
               {
-                programs.map((program: any) => {  
+                program.activities.map((activity: any) => {  
                   
-                  if (Object.keys(program.data).length > 0) {
+                  if (Object.keys(activity.data).length > 0) {
 
-                    const latitude: number = program.data.lat ? 
-                      program.data.lat : 
-                      program.data.center.lat;
+                    const latitude: number = activity.data.lat ? 
+                      activity.data.lat : 
+                      activity.data.center.lat;
                     
-                    const longitude: number = program.data.lon ? 
-                    program.data.lon : 
-                    program.data.center.lon;
+                    const longitude: number = activity.data.lon ? 
+                    activity.data.lon : 
+                    activity.data.center.lon;
 
                     return (
                       <ActivityCard 
-                        key={program.data.id}
-                        type={program.type}
-                        name={program.data.tags.name}
+                        key={activity.data.id}
+                        type={activity.type}
+                        name={
+                          activity.data.tags.name ?
+                          activity.data.tags.name :
+                          "Lieu mistère"
+                        }
                         coordinates={
                           {
                             latitude: latitude,
@@ -89,9 +106,8 @@ const Program: React.FC = () => {
               }
             </div>
           </div>
-        </>
+        </div>
       }
-      
     </div>
   )
 }

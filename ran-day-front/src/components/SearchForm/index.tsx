@@ -1,6 +1,5 @@
 import './index.css'
 import { useState, useRef } from 'react'
-import { createPortal } from 'react-dom'
 import { useNavigate } from 'react-router-dom'
 import axiosClient from '../../axiosClient'
 import { LocalizationProvider} from '@mui/x-date-pickers'
@@ -11,14 +10,11 @@ import {
   InputLabel, 
   Select, 
   MenuItem,
-  SelectChangeEvent,
-  Backdrop,
-  CircularProgress } from '@mui/material'
+  SelectChangeEvent } from '@mui/material'
 import { Dayjs } from 'dayjs'
 import PlaceInput from '../forms/PlaceInput'
 import { useProgramContext } from '../../contexts/ProgramContextProvider'
 import { useAlertContext } from '../../contexts/AlertContextProvider'
-import { set } from 'react-hook-form'
 
 
 export interface FormError {
@@ -42,12 +38,10 @@ const SearchForm: React.FC = () => {
   const [programType, setProgramType] = useState<string>('');
 
   const {
-    loadingPrograms,
-    setPrograms, 
-    setProgramDate,
-    setProgramCity,
-    setLoadingPrograms} = useProgramContext();
+    setProgram,
+    setLoadingProgram} = useProgramContext();
   const {setAlert} = useAlertContext();
+
   const navigateProgram = useNavigate();
 
   const handleSelectChange = (e: SelectChangeEvent<string>)  => {
@@ -92,22 +86,26 @@ const SearchForm: React.FC = () => {
       return;
     }
 
-    setLoadingPrograms(true);
+    setLoadingProgram(true);
 
     axiosClient.get(`/place?city=${placeInput}&program=${programType}`)
     .then(({data}) => {
-      console.log(data);
+      setProgram({
+        city: placeInput,
+        date: date,
+        theme: programType,
+        activities: data
+      })
+
       setDate(null);
       setProgramType('');
       setPlaceInput('');
-      setProgramCity(placeInput);
-      setPrograms(data);
-      setProgramDate(date);
+      
       navigateProgram('/program');  
-      setLoadingPrograms(false);
+      setLoadingProgram(false);
     })
     .catch(() => {
-      setLoadingPrograms(false);
+      setLoadingProgram(false);
       setAlert(
         {
           type: 'Error',
@@ -123,21 +121,6 @@ const SearchForm: React.FC = () => {
       className="search-form"
       onSubmit={handleSubmit}
     >
-      {
-        loadingPrograms &&
-          createPortal(
-            <Backdrop
-              sx={{ 
-                color: '#FDFDFF', 
-                zIndex: (theme) => theme.zIndex.drawer + 1 
-              }}
-              open={true}
-            >
-              <CircularProgress color="inherit" />
-            </Backdrop>,
-            document.body
-          )
-      }
       <PlaceInput 
         formError={formError}
         setFormError={setFormError}
