@@ -22,7 +22,11 @@ class UserController extends Controller
             return new UserResource($user);
             
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            info($e);
+            return response()->json([
+                'message' => 'Erreur lors de la mise à jour du compte'], 
+                500
+            );
         }
     }
 }

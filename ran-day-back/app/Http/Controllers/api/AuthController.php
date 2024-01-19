@@ -33,7 +33,10 @@ class AuthController extends Controller
                 'token' => $token
             ], 201);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            info($e);
+            return response()->json([
+                'message' => 'Une erreur est survenue lors de la création du compte'
+            ], 500);
         }
     }
 
@@ -60,7 +63,23 @@ class AuthController extends Controller
                 'token' => $token
             ], 200);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            info($e);
+            return response()->json([
+                'message' => 'Une erreur est survenue lors de la connexion'
+            ], 500);
+        }
+    }
+
+    public function logout (Request $request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+            return response()->json(['message' => 'Succès de la déconnexion'], 204);
+        } catch (Exception $e) {
+            info($e);
+            return response()->json([
+                'message' => 'Une erreur est survenue lors de la déconnexion'
+            ], 500);
         }
     }
 }

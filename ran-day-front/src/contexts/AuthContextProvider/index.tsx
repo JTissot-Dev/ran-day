@@ -16,6 +16,7 @@ interface CurrentUser {
 type AuthAction =
   | { type: "authentication"; value: CurrentUser }
   | { type: "refresh"; value: User }
+  | { type: "logout" }
 
 interface Auth {
   currentUser: CurrentUser
@@ -63,7 +64,6 @@ const reducer = (state: CurrentUser, action: AuthAction) => {
       return newState;
     }
     case 'refresh': {
-      console.log(action)
       return {
         ...state,
         user: {
@@ -72,6 +72,18 @@ const reducer = (state: CurrentUser, action: AuthAction) => {
           lastName: action.value.lastName,
           email: action.value.email
         }
+      }
+    }
+    case 'logout': {
+      setToken(null);
+      return {
+        user: {
+          userId: null,
+          firstName: '',
+          lastName: '',
+          email: ''
+        },
+        token: null
       }
     }
     default:

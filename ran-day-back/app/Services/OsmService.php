@@ -24,21 +24,15 @@ class OsmService
 
             // Gestion des erreurs
             if (curl_errno($ch)) {
-                  echo 'Erreur cURL : ' . curl_error($ch);
+                  info(curl_error($ch));
             }
 
             // Fermeture de la ressource cURL
             curl_close($ch);
 
             // Traitement de la réponse
-            if ($response !== false) {
-                  $data = json_decode($response, true);
-
-                return $data['elements'];
-            } else {
-                  echo 'Erreur lors de la récupération des données depuis l\'API Overpass';
-                  return null;
-            }
+            $data = json_decode($response, true);
+            return $data['elements'];
         }
     
     private function getPlace(String $city,String $placeCategory, String $placeType)
@@ -52,7 +46,6 @@ class OsmService
 
         $places = $this->executeOverpassQuery($query);
 
-        info($places);
         return $places;
       }
 

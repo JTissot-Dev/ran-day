@@ -52,7 +52,23 @@ li {
   color: rgba(32, 32, 32, 0.762);
 }
 
+.logout-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  height: 20px;
+  text-decoration: none;
+  color: rgba(32, 32, 32, 0.762);
+}
+
 .nav-link:hover {
+  color: #5200FF;
+}
+
+.logout-button:hover {
   color: #5200FF;
 }
 

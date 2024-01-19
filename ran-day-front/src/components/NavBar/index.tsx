@@ -1,17 +1,22 @@
 import './index.css'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import useOutsideClick from '../../hooks/useOutsideClick'
-import { ChildProps } from '../Header'
-import { useAuthContext } from '../../contexts/AuthContextProvider'
+import { Link, useNavigate } from 'react-router-dom'
 import { BsHeart } from "react-icons/bs";
 import { BsBookmark } from "react-icons/bs";
 import { BsBoxArrowRight } from "react-icons/bs";
+import useOutsideClick from '../../hooks/useOutsideClick'
+import { ChildProps } from '../Header'
+import { useAuthContext } from '../../contexts/AuthContextProvider'
+import { useAlertContext } from '../../contexts/AlertContextProvider'
+import axiosClient from '../../axiosClient'
+
 
 
 const NavBar: React.FC<ChildProps> = ({isOpen, toggle, setBackgroundHide }) => {
 
-  const { currentUser } = useAuthContext();
+  const { currentUser, dispatch } = useAuthContext();
+  const { setAlert } = useAlertContext();
+  const navigateHome = useNavigate();
 
   const clickOutside = useOutsideClick(() => {
     if (isOpen) {
@@ -21,6 +26,26 @@ const NavBar: React.FC<ChildProps> = ({isOpen, toggle, setBackgroundHide }) => {
       }, 10)
     }
   });
+
+
+  const logout = () => {
+    axiosClient.post('/logout')
+    .then(() => {
+      dispatch({type: 'logout'});
+      toggle(false);
+      setBackgroundHide(false);
+      navigateHome('/index');
+    })
+    .catch(() => {
+      toggle(false);
+      setBackgroundHide(false);
+      setAlert({
+        type: 'Error',
+        message: 'Une erreur est survenue, veuillez actualiser la page.',
+        layout: 'Default'
+      })
+    })
+  }
 
   return (
     <motion.nav 
@@ -44,13 +69,13 @@ const NavBar: React.FC<ChildProps> = ({isOpen, toggle, setBackgroundHide }) => {
         </div> :
         <ul className="nav-list">
           <li>
-            <Link 
-              className="nav-link"
-              to="/"
+            <button 
+              className="logout-button"
+              onClick={ logout }
             >
               <BsBoxArrowRight />
               <span>Se déconnecter</span>
-            </Link>
+            </button>
           </li>
           <li>
             <Link 
