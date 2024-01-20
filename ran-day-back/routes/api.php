@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\UserController;
 use App\Http\Controllers\api\OsmController;
+use App\Http\Controllers\api\ProgramController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,10 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::resource('user', UserController::class)->only(['update']);
+    Route::apiResource('user', UserController::class)->only(['update']);
+    Route::apiResources([
+        'program' => ProgramController::class
+    ]);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);
