@@ -3,11 +3,11 @@ import { Dayjs } from 'dayjs'
 
 
 interface Activity {
-  id: number,
+  id: number | undefined,
   type: string,
-  name: string,
-  latitude: number,
-  longitude: number
+  name: string | undefined,
+  latitude: number | undefined,
+  longitude: number | undefined
 }
 
 export interface Program {

@@ -1,25 +1,26 @@
-import './index.css';
-import { BsHeart } from "react-icons/bs";
-import { useProgramContext } from '../../../../contexts/ProgramContextProvider';
+import './index.css'
+import { BsHeart } from "react-icons/bs"
+import { useProgramContext } from '../../../../contexts/ProgramContextProvider'
+import { useAuthContext } from '../../../../contexts/AuthContextProvider'
 
 
-export interface ProgramButtonProps {
-  saveProgram: () => void
-}
+const FavoryButton: React.FC = () => {
 
-const FavoryButton: React.FC<ProgramButtonProps> = ({saveProgram}) => {
-
-  const {program} = useProgramContext();
+  const {program, setProgram} = useProgramContext();
+  const {currentUser} = useAuthContext();
 
   return (
     <button 
       className={`
         ${!program.favorite ? "favory-button" : "favory-button-active"}
+        ${!currentUser.token ? "favory-button-disable" : ""}
       `}
-      onClick={
-        !program.favorite && !program.save ?
-          saveProgram :
-          () => console.log('toto')
+      onClick={() => setProgram(prevProgram => ({
+        ...prevProgram,
+        favorite: !program.favorite
+      }))}
+      disabled={
+        !currentUser.token ? true : false
       }
     >
       <BsHeart className="favory-icon"/>

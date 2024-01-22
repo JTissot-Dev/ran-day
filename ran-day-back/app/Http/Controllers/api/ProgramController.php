@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Program;
 use App\Http\Requests\StoreProgramRequest;
+use App\Http\Requests\UpdateProgramRequest;
 use App\Http\Resources\ProgramResource;
 use Exception;
 
@@ -42,12 +43,29 @@ class ProgramController extends Controller
                     'longitude' => $activity['longitude'],
                 ]);
             }
-    
             return new ProgramResource($program);
         } catch (Exception $e) {
             info($e);
             return response()->json([
                 'message' => 'Erreur lors de la création du programme'], 
+                500
+            );
+        }
+    }
+
+    public function update(UpdateProgramRequest $request, Program $program)
+    {
+        try {
+            $data = $request->validated();
+            $program->update([
+                'save' => $data['save'],
+                'favorite' => $data['favorite'],
+            ]);
+            return new ProgramResource($program);
+        } catch (Exception $e) {
+            info($e);
+            return response()->json([
+                'message' => 'Erreur lors de la mise à jour du programme'], 
                 500
             );
         }
@@ -66,6 +84,17 @@ class ProgramController extends Controller
      */
     public function destroy(Program $program)
     {
-        //
+        try {
+            $program->delete();
+            return response()->json([
+                'message' => 'Programme supprimé avec succès'
+            ], 204);
+        } catch (Exception $e) {
+            info($e);
+            return response()->json([
+                'message' => 'Erreur lors de la suppression du programme'], 
+                500
+            );
+        }
     }
 }

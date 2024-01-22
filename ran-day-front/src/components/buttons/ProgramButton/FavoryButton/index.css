@@ -26,6 +26,12 @@
   font-weight: 500;
 }
 
+.favory-button-disable {
+  border: 1px solid #5b5b5bb0;
+  color: #5b5b5bb0;
+  cursor: not-allowed;
+}
+
 .favory-icon {
   margin-right: 10px;
   width: 16px;
@@ -35,4 +41,9 @@
 .favory-button:hover {
   border: 1px solid #1565C0;
   color: #1565C0;
+}
+
+.favory-button-disable:hover {
+  border: 1px solid #5b5b5bb0;
+  color: #5b5b5bb0;
 }

@@ -1,5 +1,6 @@
 import './index.css'
 import dayjs from 'dayjs'
+import { useEffect } from 'react'
 import { useProgramContext } from "../../contexts/ProgramContextProvider"
 import { useAlertContext } from '../../contexts/AlertContextProvider'
 import ActivityCard from "../../components/cards/ActivityCard"
@@ -36,46 +37,76 @@ const Program: React.FC = () => {
   const {setAlert} = useAlertContext();
   const screenSize: Dimensions = useDimensions();
   const dateFormatedTemplate: string | undefined = program.date?.format("DD/MM/YYYY");
+  const dateFormatedApi: string | undefined = program.date?.format("YYYY-MM-DD");
   console.log(program)
-  const saveProgram = (saveType: string): void => {
 
-    const favoriteProgram: any = {
-      ...program,
-      date: program.date?.format("YYYY-MM-DD"),
-      [saveType]: true
+  useEffect(() => {
+    if (!program.id && (program.save || program.favorite)) {
+      const activities = program.activities.filter((activity: any) => activity.id)  
+      axiosClient.post('/program', {
+        ...program,
+        date: dateFormatedApi,
+        activities: activities
+      })
+      .then(({data}) => {
+        console.log(data)
+        setProgram(prevProgram => ({
+          ...prevProgram,
+          id: data.data.id
+        }))
+      })
+      .catch((error) => {
+        console.log(error)
+        setAlert({
+          type: 'Error',
+          message: 'Une erreur est survenue lors de la sauvegarde du programme.',
+          layout: 'Default'
+        })
+      })
+      return;
     }
-    axiosClient.post('/program', favoriteProgram)
-    .then(({data}) => {
-      console.log(data.data)
-      setProgram({
-        ...data.data,
-        date: dayjs(data.data.date)
+
+    if (program.save || program.favorite) {
+      axiosClient.put(`/program/${program.id}`, {
+        ...program,
+        date: dateFormatedApi
       })
-    })
-    .catch(() => {
-      setAlert({
-        type: 'Error',
-        message: 'Une erreur est survenue lors de la sauvegarde du programme.',
-        layout: 'Default'
+      .catch(() => {
+        setAlert({
+          type: 'Error',
+          message: 'Une erreur est survenue lors de la mise à jour du programme.',
+          layout: 'Default'
+        })
       })
-    })
-  }
+      return;
+    }
+
+    if (program.id && (!program.save && !program.favorite)) {
+      axiosClient.delete(`/program/${program.id}`)
+      .then(() => {
+        setProgram(prevProgram => ({
+          ...prevProgram,
+          id: null
+        }))
+      })
+      .catch(() => {
+        setAlert({
+          type: 'Error',
+          message: 'Une erreur est survenue lors de la suppression du programme.',
+          layout: 'Default'
+        })
+      })
+    }
+  }, [program.save, program.favorite])
+
 
   const favoryButton = screenSize.width < 768 ?
-    <FavoryButtonSmall 
-      saveProgram={() => saveProgram("favorite")}
-    /> :
-    <FavoryButton 
-      saveProgram={() => saveProgram("favorite")}
-    />;
+    <FavoryButtonSmall /> :
+    <FavoryButton />;
 
   const saveButton = screenSize.width < 768 ?
-    <SaveButtonSmall 
-      saveProgram={() => saveProgram("save")}
-    /> :
-    <SaveButton 
-      saveProgram={() => saveProgram("save")}
-    />;
+    <SaveButtonSmall /> :
+    <SaveButton />;
 
   return (
     <div className="program-container">

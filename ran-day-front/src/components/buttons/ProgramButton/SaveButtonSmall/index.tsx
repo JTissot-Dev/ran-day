@@ -1,22 +1,26 @@
-import './index.css';
-import { BsBookmark } from "react-icons/bs";
-import { useProgramContext } from '../../../../contexts/ProgramContextProvider';
-import { ProgramButtonProps } from '../FavoryButton';
+import './index.css'
+import { BsBookmark } from "react-icons/bs"
+import { useProgramContext } from '../../../../contexts/ProgramContextProvider'
+import { useAuthContext } from '../../../../contexts/AuthContextProvider'
 
 
-const SaveButtonSmall: React.FC<ProgramButtonProps> = ({saveProgram}) => {
+const SaveButtonSmall: React.FC = () => {
 
-  const {program} = useProgramContext();
+  const {program, setProgram} = useProgramContext();
+  const {currentUser} = useAuthContext();
 
   return (
     <button 
       className={`
         ${!program.save ? "save-button-small" : "save-button-small-active"}
+        ${!currentUser.token ? "save-button-small-disable" : ""}
       `}
-      onClick={
-      !program.favorite && !program.save ?
-        saveProgram :
-        () => console.log('toto')
+      onClick={() => setProgram(prevProgram => ({
+        ...prevProgram,
+        save: !program.save
+      }))}
+      disabled={
+        !currentUser.token ? true : false
       }
     >
       <BsBookmark className="save-icon-small"/>

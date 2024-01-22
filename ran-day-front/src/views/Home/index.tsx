@@ -65,9 +65,12 @@ const Home: React.FC = () => {
     axiosClient.get(programsInfos.path)
     .then(({data}) => {
       setProgram({
+        id: null,
         city: programsInfos.place,
         date: dayjs().add(1, 'day'),
         theme: programsInfos.theme,
+        save: false,
+        favorite: false,
         activities: data
       })
       setLoadingProgram(false);

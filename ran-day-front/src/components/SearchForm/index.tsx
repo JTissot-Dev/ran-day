@@ -38,6 +38,7 @@ const SearchForm: React.FC = () => {
   const [programType, setProgramType] = useState<string>('');
 
   const {
+    program,
     setProgram,
     setLoadingProgram} = useProgramContext();
   const {setAlert} = useAlertContext();
@@ -59,7 +60,7 @@ const SearchForm: React.FC = () => {
       date: false
     })
   }
-
+  console.log(program)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -87,10 +88,10 @@ const SearchForm: React.FC = () => {
     }
 
     setLoadingProgram(true);
-
+    
     axiosClient.get(`/place?city=${placeInput}&program=${programType}`)
     .then(({data}) => {
-      console.log(data)
+      
       setProgram({
         id: null,
         city: placeInput,
@@ -98,7 +99,7 @@ const SearchForm: React.FC = () => {
         theme: programType,
         save: false,
         favorite: false,
-        activities: data
+        activities: data,
       })
 
       setDate(null);

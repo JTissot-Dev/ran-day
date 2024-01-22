@@ -12,6 +12,11 @@
   color: #1565C0;
 }
 
+.favory-button-small-disable {
+  cursor: not-allowed;
+  color: #5b5b5bb0;
+}
+
 .favory-icon-small {
   width: 26px;
   height: 26px;

@@ -48,6 +48,10 @@
   margin-bottom: 10px;
 }
 
+.favory-button-active {
+  margin-bottom: 10px;
+}
+
 .program-infos {
   grid-column-start: 1;
   grid-column-end: 4;
@@ -107,5 +111,8 @@
   .favory-button {
     margin-bottom: 0px;
   }
-  
+
+  .favory-button-active {
+    margin-bottom: 0px;
+  }
 }

@@ -19,7 +19,10 @@ return new class extends Migration
             $table->float('latitude', 10, 6);
             $table->float('longitude', 10, 6);
             $table->unsignedBigInteger('program_id');
-            $table->foreign('program_id')->references('id')->on('programs');
+            $table->foreign('program_id')
+                  ->references('id')
+                  ->on('programs')
+                  ->onDelete('cascade');
         });
     }
 

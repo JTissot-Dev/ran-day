@@ -26,6 +26,12 @@
   font-weight: 500;
 }
 
+.save-button-disable {
+  border: 1px solid #5b5b5bb0;
+  color: #5b5b5bb0;
+  cursor: not-allowed;
+}
+
 .save-icon {
   margin-right: 10px;
   width: 16px;
@@ -36,4 +42,9 @@
   background-color: transparent;
   border: 1px solid #1565C0;
   color: #1565C0;
+}
+
+.save-button-disable:hover {
+  border: 1px solid #5b5b5bb0;
+  color: #5b5b5bb0;
 }
