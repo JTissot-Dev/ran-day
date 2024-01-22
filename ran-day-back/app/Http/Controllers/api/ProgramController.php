@@ -33,7 +33,6 @@ class ProgramController extends Controller
                 'favorite' => $data['favorite'],
                 'user_id' => auth()->user()->id,
             ]);
-            info($program);
     
             foreach ($data['activities'] as $activity) {
                 $program->activities()->create([

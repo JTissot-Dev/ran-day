@@ -5,6 +5,13 @@
   color: #5B5B5B;
 }
 
+.favory-button-small-active {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #1565C0;
+}
+
 .favory-icon-small {
   width: 26px;
   height: 26px;

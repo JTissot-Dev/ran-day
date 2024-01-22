@@ -12,6 +12,20 @@
   font-weight: 500;
 }
 
+.save-button-active {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  padding: 0 10px 0 10px;
+  border-radius: 7px;
+  height: 30px;
+  cursor: pointer;
+  border: 1px solid #1565C0;
+  color: #1565C0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
 .save-icon {
   margin-right: 10px;
   width: 16px;

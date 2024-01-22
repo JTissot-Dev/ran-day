@@ -35,7 +35,7 @@ class OsmService
             return $data['elements'];
         }
     
-    private function getPlace(String $city,String $placeCategory, String $placeType)
+    private function getPlace(String $city, String $placeCategory, String $placeType)
     {
         $query = "
         [out:json];
@@ -46,7 +46,21 @@ class OsmService
 
         $places = $this->executeOverpassQuery($query);
 
-        return $places;
+        $formatedPlaces = array_map(function($place) {
+            return [
+                'id' => $place['id'],
+                'name' => isset($place['tags']['name']) ? 
+                          $place['tags']['name'] : 
+                          'Lieu mystère',
+                'latitude' =>  isset($place['lat']) ? 
+                          $place['lat'] : 
+                          $place['center']['lat'],
+                'longitude' =>  isset($place['lon']) ? 
+                          $place['lon'] : 
+                          $place['center']['lon'],
+            ];
+        }, $places);
+        return $formatedPlaces;
       }
 
       private function getRandomPlace(Array $places)
@@ -100,59 +114,58 @@ class OsmService
         $beachResort = $this->getRandomPlace($beachResorts);
         $fastFood = $this->getRandomPlace($fastFoods);
 
-        
 
         $classicProgram1 = [
-            ['type' => 'coffee', 'data' => $cafe],
-            ['type' => 'attraction', 'data' => $attraction],
-            ['type' => 'restaurant', 'data' => $restaurant],
-            ['type' => 'museum', 'data' => $museum],
-            ['type' => 'bar', 'data' => $bar]
+            array_merge(['type' => 'coffee'], $cafe),
+            array_merge(['type' => 'attraction'], $attraction),
+            array_merge(['type' => 'restaurant'], $restaurant),
+            array_merge(['type' => 'museum'], $museum),
+            array_merge(['type' => 'bar'], $bar)
         ];
-
+        
         $classicProgram2 = [
-            ['type' => 'coffee', 'data' => $cafe],
-            ['type' => 'attraction', 'data' => $attraction],
-            ['type' => 'restaurant', 'data' => $restaurant],
-            ['type' => 'park', 'data' => $park],
-            ['type' => 'cinema', 'data' => $cinema]
+            array_merge(['type' => 'coffee'], $cafe),
+            array_merge(['type' => 'attraction'], $attraction),
+            array_merge(['type' => 'restaurant'], $restaurant),
+            array_merge(['type' => 'park'], $park),
+            array_merge(['type' => 'cinema'], $cinema)
         ];
-
+        
         $classicProgram3 = [
-            ['type' => 'coffee', 'data' => $cafe],
-            ['type' => 'attraction', 'data' => $attraction],
-            ['type' => 'amusementArcade', 'data' => $amusmentArcade],
-            ['type' => 'iceCream', 'data' => $iceCream],
-            ['type' => 'restaurant', 'data' => $restaurant]
+            array_merge(['type' => 'coffee'], $cafe),
+            array_merge(['type' => 'attraction'], $attraction),
+            array_merge(['type' => 'amusementArcade'], $amusmentArcade),
+            array_merge(['type' => 'iceCream'], $iceCream),
+            array_merge(['type' => 'restaurant'], $restaurant)
         ];
-
+        
         $outdoorProgram1 = [
-            ['type' => 'natureReserve', 'data' => $natureReserve],
-            ['type' => 'viewPoint', 'data' => $viewPoint],
-            ['type' => 'bathingPlace', 'data' => $bathingPlace],
+            array_merge(['type' => 'natureReserve'], $natureReserve),
+            array_merge(['type' => 'viewPoint'], $viewPoint),
+            array_merge(['type' => 'bathingPlace'], $bathingPlace),
         ];
-
+        
         $outdoorProgram2 = [
-            ['type' => 'park', 'data' => $natureReserve],
-            ['type' => 'viewPoint', 'data' => $viewPoint],
-            ['type' => 'beachResort', 'data' => $beachResort],
+            array_merge(['type' => 'park'], $park),
+            array_merge(['type' => 'viewPoint'], $viewPoint),
+            array_merge(['type' => 'beachResort'], $beachResort),
         ];
-
+        
         $partyProgram = [
-            ['type' => 'coffee', 'data' => $cafe],
-            ['type' => 'bar', 'data' => $bar],
-            ['type' => 'casino', 'data' => $casino],
-            ['type' => 'fastFood', 'data' => $fastFood],
-            ['type' => 'pub', 'data' => $pub],
-            ['type' => 'nightclub', 'data' => $nightclub]
+            array_merge(['type' => 'coffee'], $cafe),
+            array_merge(['type' => 'bar'], $bar),
+            array_merge(['type' => 'casino'], $casino),
+            array_merge(['type' => 'fastFood'], $fastFood),
+            array_merge(['type' => 'pub'], $pub),
+            array_merge(['type' => 'nightclub'], $nightclub)
         ];
-
+        
         $cultureProgram = [
-            ['type' => 'coffee', 'data' => $cafe],
-            ['type' => 'artwork', 'data' => $artwork],
-            ['type' => 'museum', 'data' => $museum],
-            ['type' => 'attraction', 'data' => $attraction],
-            ['type' => 'cinema', 'data' => $cinema],
+            array_merge(['type' => 'coffee'], $cafe),
+            array_merge(['type' => 'artwork'], $artwork),
+            array_merge(['type' => 'museum'], $museum),
+            array_merge(['type' => 'attraction'], $attraction),
+            array_merge(['type' => 'cinema'], $cinema),
         ];
 
         $classicPrograms = [
@@ -166,11 +179,12 @@ class OsmService
             $outdoorProgram2,
         ];
 
+
         if ($program == 'classic-program') {
           return $this->getRandomPlace($classicPrograms);
         }
         if ($program == 'outdoor-program') {
-          return $this->getRandomPlace($outdoorPrograms);
+            return $this->getRandomPlace($outdoorPrograms);
         }
         if ($program == 'party-program') {
           return $partyProgram;

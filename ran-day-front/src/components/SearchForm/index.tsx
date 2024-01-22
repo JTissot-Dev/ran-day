@@ -90,10 +90,14 @@ const SearchForm: React.FC = () => {
 
     axiosClient.get(`/place?city=${placeInput}&program=${programType}`)
     .then(({data}) => {
+      console.log(data)
       setProgram({
+        id: null,
         city: placeInput,
         date: date,
         theme: programType,
+        save: false,
+        favorite: false,
         activities: data
       })
 

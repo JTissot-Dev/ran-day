@@ -1,11 +1,14 @@
 import './index.css'
+import dayjs from 'dayjs'
 import { useProgramContext } from "../../contexts/ProgramContextProvider"
+import { useAlertContext } from '../../contexts/AlertContextProvider'
 import ActivityCard from "../../components/cards/ActivityCard"
 import SearchForm from '../../components/SearchForm'
 import { 
   BsGeoAlt,
   BsCalendar4Event,
   BsSliders2Vertical } from "react-icons/bs"
+import axiosClient from '../../axiosClient'
 import FavoryButton from '../../components/buttons/ProgramButton/FavoryButton'
 import FavoryButtonSmall from '../../components/buttons/ProgramButton/FavoryButtonSmall'
 import SaveButton from '../../components/buttons/ProgramButton/SaveButton'
@@ -29,17 +32,50 @@ const programThemes: any = {
 
 const Program: React.FC = () => {
 
-  const {program} = useProgramContext();
+  const {program, setProgram} = useProgramContext();
+  const {setAlert} = useAlertContext();
   const screenSize: Dimensions = useDimensions();
-  const dateFormated: String | undefined = program.date?.format("DD/MM/YYYY");
+  const dateFormatedTemplate: string | undefined = program.date?.format("DD/MM/YYYY");
+  console.log(program)
+  const saveProgram = (saveType: string): void => {
+
+    const favoriteProgram: any = {
+      ...program,
+      date: program.date?.format("YYYY-MM-DD"),
+      [saveType]: true
+    }
+    axiosClient.post('/program', favoriteProgram)
+    .then(({data}) => {
+      console.log(data.data)
+      setProgram({
+        ...data.data,
+        date: dayjs(data.data.date)
+      })
+    })
+    .catch(() => {
+      setAlert({
+        type: 'Error',
+        message: 'Une erreur est survenue lors de la sauvegarde du programme.',
+        layout: 'Default'
+      })
+    })
+  }
 
   const favoryButton = screenSize.width < 768 ?
-    <FavoryButtonSmall /> :
-    <FavoryButton />;
+    <FavoryButtonSmall 
+      saveProgram={() => saveProgram("favorite")}
+    /> :
+    <FavoryButton 
+      saveProgram={() => saveProgram("favorite")}
+    />;
 
   const saveButton = screenSize.width < 768 ?
-    <SaveButtonSmall /> :
-    <SaveButton />;
+    <SaveButtonSmall 
+      saveProgram={() => saveProgram("save")}
+    /> :
+    <SaveButton 
+      saveProgram={() => saveProgram("save")}
+    />;
 
   return (
     <div className="program-container">
@@ -61,7 +97,7 @@ const Program: React.FC = () => {
             </div>
             <div>
               <BsCalendar4Event className="info-date-icon"/>
-              <span>{ dateFormated }</span>
+              <span>{ dateFormatedTemplate }</span>
             </div>
             <div>
               <BsSliders2Vertical className="info-theme-icon"/>
@@ -74,29 +110,16 @@ const Program: React.FC = () => {
               {
                 program.activities.map((activity: any) => {  
                   
-                  if (Object.keys(activity.data).length > 0) {
-
-                    const latitude: number = activity.data.lat ? 
-                      activity.data.lat : 
-                      activity.data.center.lat;
-                    
-                    const longitude: number = activity.data.lon ? 
-                    activity.data.lon : 
-                    activity.data.center.lon;
-
+                  if (activity.id) {
                     return (
                       <ActivityCard 
-                        key={activity.data.id}
+                        key={activity.id}
                         type={activity.type}
-                        name={
-                          activity.data.tags.name ?
-                          activity.data.tags.name :
-                          "Lieu mistère"
-                        }
+                        name={activity.name}
                         coordinates={
                           {
-                            latitude: latitude,
-                            longitude: longitude
+                            latitude: activity.latitude,
+                            longitude: activity.longitude
                           }
                         }
                       />
