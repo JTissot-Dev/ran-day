@@ -80,8 +80,6 @@ const Account: React.FC = () => {
       })
   }
 
-  console.log(currentUser);
-
   return (
     <div className="account-container">
       <div className="account-head">

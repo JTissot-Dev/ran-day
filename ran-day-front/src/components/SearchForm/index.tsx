@@ -60,7 +60,6 @@ const SearchForm: React.FC = () => {
       date: false
     })
   }
-  console.log(program)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

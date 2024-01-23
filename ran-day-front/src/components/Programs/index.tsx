@@ -44,7 +44,6 @@ const Programs: React.FC<ProgramsProps> = ({type, page, setLastPage}) => {
   }, [])
 
   useEffect(() => {
-    console.log('update');
     axiosClient.get(`/program?type=${type}&page=${page}`)
     .then(({data}) => {
       setPrograms(data.data)

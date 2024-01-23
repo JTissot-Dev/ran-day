@@ -34,7 +34,6 @@ const Header: React.FC<Props> = ({setBackgroundHide}) => {
   const [isOpen, toggleOpen] = useState<boolean>(false);
   const headerRef = useRef<HTMLElement | null>(null);
   const { currentUser } = useAuthContext();
-  console.log(currentUser)
 
   scroll((progress) => {
     if (progress > 0) {

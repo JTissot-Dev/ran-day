@@ -7,7 +7,7 @@ import {
   Checkbox, 
   FormControlLabel,
   LinearProgress } from '@mui/material'
-import { useForm, SubmitHandler, set } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { useAuthContext } from '../../contexts/AuthContextProvider'
 import { useAlertContext } from '../../contexts/AlertContextProvider'
 import axiosClient from '../../axiosClient'
