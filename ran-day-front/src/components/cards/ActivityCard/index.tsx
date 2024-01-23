@@ -88,7 +88,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
         </div>
         <div>
           <a 
-            href={`https://www.google.com/maps?q=${coordinates.latitude},${coordinates.longitude}`}
+            href={`https://www.google.com/maps/search/?api=1&query=${coordinates.latitude},${coordinates.longitude}`}
             target="_blank"
           >
           <BsGeo className="geo-icon"/>
