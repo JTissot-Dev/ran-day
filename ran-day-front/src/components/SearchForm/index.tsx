@@ -106,6 +106,7 @@ const SearchForm: React.FC = () => {
       
       navigateProgram('/program');  
       setLoadingProgram(false);
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     })
     .catch(() => {
       setLoadingProgram(false);

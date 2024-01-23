@@ -75,6 +75,7 @@ const Home: React.FC = () => {
       })
       setLoadingProgram(false);
       navigateProgram('/program');
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     })
     .catch(() => {
       setAlert({
