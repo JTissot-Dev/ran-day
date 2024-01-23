@@ -24,6 +24,7 @@ const ProgramCard: React.FC<ProgramCardProps> = ({program}) => {
   const handleNavigateProgram = () => {
     setProgram(program);
     navigateProgram(`/program/${program.id}`);
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }
 
   return (

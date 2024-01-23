@@ -88,7 +88,7 @@ const NavBar: React.FC<ChildProps> = ({isOpen, toggle, setBackgroundHide }) => {
           <li>
             <Link 
               className="nav-link"
-              to="/"
+              to="/save"
             >
               <BsBookmark />
               <span>Enregistrés</span>

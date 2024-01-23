@@ -53,14 +53,12 @@ const Program: React.FC = () => {
         activities: activities
       })
       .then(({data}) => {
-        console.log(data)
         setProgram(prevProgram => ({
           ...prevProgram,
           id: data.data.id
         }))
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(() => {
         setAlert({
           type: 'Error',
           message: 'Une erreur est survenue lors de la sauvegarde du programme.',

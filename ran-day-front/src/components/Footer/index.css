@@ -8,15 +8,51 @@
   height: 120px;
   font-weight: 100;
   font-size: 14px;
-  color: rgba(59, 59, 60, 0.976);
-  margin-top: 40px;
+  color: rgb(47, 47, 47);
+}
+
+.footer-copyright {
+  font-size: 13px;
+}
+
+.footer-top div:first-child {
+  margin-right: 50px;
 }
 
 .border {
+  padding: 30px 0px 50px 0px;
   width: 90%;
   height: 99%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content:center;
   align-items: center;
   border-top: solid rgba(59, 59, 60, 0.167) 1px;
+}
+
+.footer-link {
+  text-decoration: none;
+  display: block;
+  color: rgba(59, 59, 60, 0.652);
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.footer-top {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  width: 100%;
+}
+
+.footer-top h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0;
+}
+
+.footer-top p {
+  color: rgba(59, 59, 60, 0.652);
 }

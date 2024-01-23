@@ -5,6 +5,15 @@
   grid-gap: 20px;
 }
 
+.loading-container {
+  position:fixed;
+  top: 250px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 1040px) {
   .programs-grid {
     grid-template-columns: repeat(1, 1fr);

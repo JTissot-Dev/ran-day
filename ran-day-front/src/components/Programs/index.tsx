@@ -1,5 +1,7 @@
 import './index.css'
 import { useEffect, useState } from "react"
+import { createPortal } from 'react-dom'
+import CircularProgress from '@mui/material/CircularProgress'
 import { Program } from "../../contexts/ProgramContextProvider"
 import axiosClient from "../../axiosClient"
 import { useAlertContext } from "../../contexts/AlertContextProvider"
@@ -16,11 +18,12 @@ interface ProgramsProps {
 const Programs: React.FC<ProgramsProps> = ({type, page, setLastPage}) => {
 
   const [programs, setPrograms] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [emptyProgramsInfo, setEmptyProgramsInfo] = useState<string>('');
   const {setAlert} = useAlertContext();
 
   useEffect(() => {
-    console.log('montage');
+    setLoading(true);
     axiosClient.get(`/program?type=${type}`)
     .then(({data}) => {
       if (data.data.length === 0) {
@@ -28,8 +31,10 @@ const Programs: React.FC<ProgramsProps> = ({type, page, setLastPage}) => {
       }
       setPrograms(data.data);
       setLastPage(data.meta.last_page);
+      setLoading(false);
     })
     .catch(() => {
+      setLoading(false);
       setAlert({
         type: 'Error',
         message: 'Une erreur est survenue, veuillez actualiser la page.',
@@ -56,6 +61,15 @@ const Programs: React.FC<ProgramsProps> = ({type, page, setLastPage}) => {
 
   return (
     <div className="programs-grid">
+      {
+        loading &&
+        createPortal(
+          <div className="loading-container">
+          <CircularProgress />
+        </div>,
+        document.body
+        )
+      }
       {
         programs.length > 0 ?
           programs.map((program: Program) => {
