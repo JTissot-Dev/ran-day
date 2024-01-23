@@ -1,6 +1,7 @@
 import './index.css'
-import dayjs from 'dayjs'
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import dayjs, {Dayjs} from 'dayjs'
 import { useProgramContext } from "../../contexts/ProgramContextProvider"
 import { useAlertContext } from '../../contexts/AlertContextProvider'
 import ActivityCard from "../../components/cards/ActivityCard"
@@ -23,7 +24,7 @@ export interface Coordinates {
   longitude: number
 }
 
-const programThemes: any = {
+export const programThemes: any = {
   'classic-program': 'Classique',
   'culture-program': 'Culture',
   'outdoor-program': 'Nature',
@@ -33,12 +34,15 @@ const programThemes: any = {
 
 const Program: React.FC = () => {
 
+  let {programId} = useParams();
   const {program, setProgram} = useProgramContext();
   const {setAlert} = useAlertContext();
   const screenSize: Dimensions = useDimensions();
-  const dateFormatedTemplate: string | undefined = program.date?.format("DD/MM/YYYY");
-  const dateFormatedApi: string | undefined = program.date?.format("YYYY-MM-DD");
-  console.log(program)
+  const programDate: Dayjs | null = typeof(program.date) === 'string' ? 
+    dayjs(program.date) : 
+    program.date
+  const dateFormatedTemplate: string | undefined = programDate?.format("DD/MM/YYYY");
+  const dateFormatedApi: string | undefined = programDate?.format("YYYY-MM-DD");
 
   useEffect(() => {
     if (!program.id && (program.save || program.favorite)) {
@@ -109,8 +113,15 @@ const Program: React.FC = () => {
     <SaveButton />;
 
   return (
-    <div className="program-container">
-      <SearchForm />
+    <div 
+      className={`
+        ${!programId ? "program-container" : "program-container-saved"}
+      `}
+    >
+      {
+        !programId &&
+          <SearchForm />
+      }
       {
         program.activities.length > 0 && 
         <div className="activities-container">

@@ -6,6 +6,8 @@ import Login from "./views/Login"
 import Signup from "./views/Signup"
 import Account from "./views/Account"
 import Program from "./views/Program"
+import Favory from "./views/Favory"
+import NotFound from "./views/NotFound"
 
 
 const router = createBrowserRouter([
@@ -26,8 +28,16 @@ const router = createBrowserRouter([
         element: <Account />
       },
       {
-        path: "/program",
+        path: "/program/:programId?",
         element: <Program />
+      },
+      {
+        path: "/favory",
+        element: <Favory />
+      },
+      {
+        path: '*',
+        element: <NotFound />
       }
     ]
   },
@@ -42,8 +52,16 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />
+      },
+      {
+        path: '*',
+        element: <NotFound />
       }
     ]
+  },
+  {
+    path: '*',
+    element: <NotFound />
   }
 ])
 

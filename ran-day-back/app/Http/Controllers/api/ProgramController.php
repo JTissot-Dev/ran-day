@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreProgramRequest;
 use App\Http\Requests\UpdateProgramRequest;
 use App\Http\Resources\ProgramResource;
@@ -14,9 +15,33 @@ class ProgramController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try {
+            $programsType = $request->input('type');
+            info($programsType);
+
+            if ($programsType === 'save') {
+                $programs = Program::where('user_id', auth()->user()->id)
+                    ->where('save', true)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
+                return ProgramResource::collection($programs);
+            } 
+            if ($programsType === 'favory') {
+                $programs = Program::where('user_id', auth()->user()->id)
+                    ->where('favorite', true)
+                    ->orderBy('program_date', 'desc')
+                    ->paginate(10);
+                return ProgramResource::collection($programs);
+            }
+        } catch (Exception $e) {
+            info($e);
+            return response()->json([
+                'message' => 'Erreur lors de la récupération des programmes'], 
+                500
+            );
+        }
     }
 
     /**

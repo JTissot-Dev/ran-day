@@ -1,4 +1,6 @@
 import './index.css'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { motion} from 'framer-motion'
 import { ChildProps } from '../../Header'
 
@@ -15,6 +17,8 @@ const Path = (props: any) => (
 
 const NavToggle: React.FC<ChildProps> = ({ toggle, isOpen, setBackgroundHide }) => {
 
+  const currentView = useLocation();
+
   const handleToggle = (): void => {
     if (isOpen) {
       toggle(false);
@@ -24,6 +28,13 @@ const NavToggle: React.FC<ChildProps> = ({ toggle, isOpen, setBackgroundHide }) 
       setBackgroundHide(true);
     }
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      toggle(false);
+      setBackgroundHide(false);
+    }
+  }, [currentView])
 
   return (
     <motion.button 

@@ -3,13 +3,18 @@
   margin-bottom: 150px;
   min-width: 100%;
 }
+.program-container-saved {
+  margin-top: -50px;
+  margin-bottom: 100px;
+  min-width: 100%;
+}
 
 .activities-container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 }
 
-.program-container h1 {
+.program-container h1, .program-container-saved h1 {
   color: #222222;
   font-size: 1.5rem;
 }

@@ -11,7 +11,6 @@ import { useAlertContext } from '../../contexts/AlertContextProvider'
 import axiosClient from '../../axiosClient'
 
 
-
 const NavBar: React.FC<ChildProps> = ({isOpen, toggle, setBackgroundHide }) => {
 
   const { currentUser, dispatch } = useAuthContext();
@@ -28,7 +27,7 @@ const NavBar: React.FC<ChildProps> = ({isOpen, toggle, setBackgroundHide }) => {
   });
 
 
-  const logout = () => {
+  const logout = (): void => {
     axiosClient.post('/logout')
     .then(() => {
       dispatch({type: 'logout'});
@@ -80,7 +79,7 @@ const NavBar: React.FC<ChildProps> = ({isOpen, toggle, setBackgroundHide }) => {
           <li>
             <Link 
               className="nav-link"
-              to="/"
+              to="/favory"
             >
               <BsHeart />
               <span>Mes favoris</span>
