@@ -1,7 +1,7 @@
 import './index.css'
 import { ReactElement, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { progress, scroll } from 'framer-motion'
+import { scroll } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { BsPersonCircle } from "react-icons/bs"
 import { BsFillPersonFill } from "react-icons/bs"

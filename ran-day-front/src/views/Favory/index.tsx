@@ -10,6 +10,7 @@ const Favory: React.FC = () => {
   const [lastPage, setLastPage] = useState<number>(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
+    event.stopPropagation();
   };
   
   return (

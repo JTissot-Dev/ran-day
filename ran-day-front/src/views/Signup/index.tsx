@@ -39,7 +39,7 @@ const Signup: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [signupError, setSignupError] = useState<string>('');
-  const { dispatch, currentUser } = useAuthContext();
+  const { dispatch } = useAuthContext();
   const { setAlert } = useAlertContext(); 
   const navigate = useNavigate();
   
