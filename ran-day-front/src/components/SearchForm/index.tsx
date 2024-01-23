@@ -38,7 +38,6 @@ const SearchForm: React.FC = () => {
   const [programType, setProgramType] = useState<string>('');
 
   const {
-    program,
     setProgram,
     setLoadingProgram} = useProgramContext();
   const {setAlert} = useAlertContext();
