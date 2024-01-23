@@ -13,6 +13,7 @@
 
 .footer-copyright {
   font-size: 13px;
+  font-weight: 400;
 }
 
 .footer-top div:first-child {
@@ -33,7 +34,8 @@
 .footer-link {
   text-decoration: none;
   display: block;
-  color: rgba(59, 59, 60, 0.652);
+  color: rgba(59, 59, 60, 0.814);
+  font-weight: 400;
   margin-bottom: 5px;
   font-size: 14px;
 }
@@ -54,5 +56,6 @@
 }
 
 .footer-top p {
-  color: rgba(59, 59, 60, 0.652);
+  font-weight: 400;
+  color: rgba(59, 59, 60, 0.814);
 }
