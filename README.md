@@ -1,4 +1,4 @@
-![Cover](https://github.com/JTissot-Dev/ran-day/blob/resources-readme/readme-head.png?raw=true)
+![Cover](https://github.com/JTissot-Dev/ran-day/blob/resources-readme/readme-head.png)
 
 <br>
 
@@ -11,15 +11,15 @@
 </div>
 <br>
 <br>
-Task Planner is a project management application based on a kanban board and drag and drop fonctionnalities.
+RanDay is a web application allowing to quickly get a random activities program on a day.
 <br>
 
 
 ### Built With
 
-* ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+* ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![MUI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 
 * ![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
 ![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
@@ -39,11 +39,11 @@ Set up:
 ### Installation
 1. Clone the repository
    ```sh
-   git clone https://github.com/JTissot-Dev/task-planner.git
+   git clone https://github.com/JTissot-Dev/ran-day.git
    ```
-2. Move to the application directory
+2. Move to the backend application directory
    ```sh
-   cd task-planner
+   cd ran-day/ran-day-back
    ```
 3. Install PHP dependancies
    ```sh
@@ -76,7 +76,7 @@ Set up:
    ```
 9. Let's start the frontend installation, move to the react application directory
    ```sh
-    cd react-task-planner
+    cd ../ran-day-front
    ```
 10. Install Node.js dependancies
        ```sh
@@ -99,17 +99,6 @@ Set up:
 ## Usage
 
 It's time to test the app !
-
-### First connection
-
-To access the app for the first time, just create an account from signup page
-<br>
-<br>
-<div align="center">
-  <img src="https://github.com/JTissot-Dev/task-planner/blob/resource-readme/readme-resources/Screen_signup.jpg?raw=true" width="90%">
-</div>
-<br>
-<br>
 
 ## Contact
 
